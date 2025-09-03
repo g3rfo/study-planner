@@ -8,12 +8,12 @@ function Navbar() {
   const { theme, toggleTheme } = UseTheme();
 
   return ( 
-  <div className="bg-white dark:bg-[#1f2937] flex justify-center">
+    <div className="flex justify-center bg-white dark:bg-[#1f2937] shadow-sm">
       <nav className="flex justify-between items-center h-20 w-[min(80%,1560px)]">
         <div className="text-2xl font-bold bg-gradient-to-r from-[#3B82F6] to-[#9333EA] text-transparent bg-clip-text">
           StudyPlanner
         </div>
-        <div className="flex justify-between items-center w-65 h-12 px-2 rounded-l-4xl rounded-r-4xl bg-[#F3F4F6] dark:bg-[#374151]">
+        <div className="flex justify-between items-center w-65 h-12 px-2 rounded-l-4xl rounded-r-4xl bg-[#F3F4F6] dark:bg-[#374151] shadow-xs">
           <Link to="/">
             <PageButton iconSource="/CalendarIcon.svg" title="Calendar" curPage={curPage} setCurPage={setCurPage} />
           </Link>
