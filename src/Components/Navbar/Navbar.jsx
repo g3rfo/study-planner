@@ -15,10 +15,10 @@ function Navbar() {
         </div>
         <div className="flex justify-between items-center w-65 h-12 px-2 rounded-l-4xl rounded-r-4xl bg-[#F3F4F6] dark:bg-[#374151] shadow-xs">
           <Link to="/">
-            <PageButton iconSource="/CalendarIcon.svg" title="Calendar" curPage={curPage} setCurPage={setCurPage} />
+            <PageButton iconName="CalendarIcon.svg" title="Calendar" curPage={curPage} setCurPage={setCurPage} />
           </Link>
           <Link to="/subjects">
-            <PageButton iconSource="/SubjectsIcon.svg" title="Subjects" curPage={curPage} setCurPage={setCurPage} />
+            <PageButton iconName="SubjectsIcon.svg" title="Subjects" curPage={curPage} setCurPage={setCurPage} />
           </Link>
         </div>
         <button 
