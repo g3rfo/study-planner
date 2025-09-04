@@ -7,11 +7,11 @@ import Subjects from './Components/Subjects/Subjects'
 function App() {
   return (
     <BrowserRouter>
-      <div className="from-white to-white bg-gradient-to-b dark:from-[#1a2332] dark:to-[#040609] bg-no-repeat h-screen">
+      <div className="flex flex-col items-center from-white to-white bg-gradient-to-b dark:from-[#1a2332] dark:to-[#040609] bg-no-repeat h-screen">
         <header>
           <Navbar />
         </header>
-        <main className="flex justify-center">
+        <main className="flex justify-center w-screen">
           <Routes>
             <Route path='/' element={<Calendar />} />
             <Route path='/subjects' element={<Subjects />} />

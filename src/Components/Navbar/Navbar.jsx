@@ -1,15 +1,19 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { UseTheme } from "../../Hooks/UseTheme";
+import { Link, useLocation } from "react-router-dom";
+import { useTheme } from "../../Hooks/useTheme";
 import PageButton from "./PageButton";
 
 function Navbar() {
-  const [curPage, setCurPage] = useState('Calendar');
-  const { theme, toggleTheme } = UseTheme();
+  const location = useLocation();
+
+  const [ curPage, setCurPage ] = useState(() => {
+    return location.pathname.startsWith("/subjects") ? 'Subjects' : 'Calendar';
+  });
+  const { theme, toggleTheme } = useTheme();
 
   return ( 
-    <div className="flex justify-center bg-white dark:bg-[#1f2937] shadow-sm">
-      <nav className="flex justify-between items-center h-20 w-[min(80%,1560px)]">
+    <div className="flex justify-center bg-white dark:bg-[#1f2937] shadow-sm w-screen">
+      <nav className="flex justify-between items-center h-20 w-[min(80vw,1560px)]">
         <div className="text-2xl font-bold bg-gradient-to-r from-[#3B82F6] to-[#9333EA] text-transparent bg-clip-text">
           StudyPlanner
         </div>
@@ -22,10 +26,12 @@ function Navbar() {
           </Link>
         </div>
         <button 
-          className="flex justify-center items-center w-9 h-9 bg-[#F3F4F6] dark:bg-[#374151] rounded-full cursor-pointer transition-all duration-200 hover:scale-110"
+          className="flex justify-center items-center w-10 h-10 bg-[#F3F4F6] dark:bg-[#374151] rounded-full cursor-pointer"
           onClick={toggleTheme}
         >
-          <img src={theme === 'dark' ? '/DarkThemeIcon.svg' : '/LightThemeIcon.svg'} alt="" className="w-5 h-5"/>
+          <div className="flex justify-center items-center w-full h-full transition-all duration-200 hover:scale-120">
+            <img src={theme === 'dark' ? '/navbar/DarkThemeIcon.svg' : '/navbar/LightThemeIcon.svg'} alt="" className="w-6 h-6"/>
+            </div>
         </button>
       </nav>
     </div>
