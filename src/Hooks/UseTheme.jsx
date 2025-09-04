@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export function UseTheme() {
+export function useTheme() {
   const [theme, setTheme] = useState(() => {
     if (localStorage.theme === 'light') return 'light';
     if (localStorage.theme === 'dark') return 'dark';
