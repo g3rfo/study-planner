@@ -12,7 +12,7 @@ function Navbar() {
   const { theme, toggleTheme } = useTheme();
 
   return ( 
-    <div className="flex justify-center bg-white dark:bg-[#1f2937] shadow-sm w-screen">
+    <div className="flex justify-center bg-white dark:bg-[#1f2937] shadow-sm box-border">
       <nav className="flex justify-between items-center h-20 w-[min(80vw,1560px)]">
         <div className="text-2xl font-bold bg-gradient-to-r from-[#3B82F6] to-[#9333EA] text-transparent bg-clip-text">
           StudyPlanner
