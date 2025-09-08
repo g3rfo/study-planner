@@ -7,7 +7,7 @@ import Subjects from './Components/Subjects/Subjects'
 function App() {
   return (
     <BrowserRouter>
-      <div className="flex flex-col items-center from-white to-white bg-gradient-to-b dark:from-[#1a2332] dark:to-[#040609] bg-no-repeat w-screen h-screen overflow-x-hidden">
+      <div className="flex flex-col items-center from-white to-white bg-gradient-to-b dark:from-[#1a2332] dark:to-[#040609] bg-no-repeat w-100% min-h-screen h-fit">
         <header className="w-full">
           <Navbar />
         </header>
