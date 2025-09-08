@@ -4,7 +4,7 @@ import SubjectsControlPanel from "./SubjectsControlPanel";
 
 function Subjects() {
   return ( 
-    <div className="w-[min(80vw,1560px)] mt-10">
+    <div className="w-[80vw] max-w-[1560px] my-10">
       <SubjectsControlPanel />
       <div className="mt-6">
         {/* <EmptyContent /> */}

@@ -6,9 +6,13 @@ function Progress() {
         <div className="text-[#4B5563] dark:text-[#D1D5DB]">1/5</div>
       </div>
       <div className="flex overflow-hidden rounded-xl">
-        <progress 
-          className="w-full h-2 [&::-webkit-progress-bar]:bg-[#374151] [&::-webkit-progress-value]:bg-gradient-to-r [&::-webkit-progress-value]:from-[#4ADE80] [&::-webkit-progress-value]:to-[#22C55E]"
-          max={100} value={20}/>
+        <div className="w-full h-2 bg-[#E5E7EB] dark:bg-[#374151] rounded overflow-hidden">
+          <div
+            className="h-2 bg-gradient-to-r from-[#4ADE80] to-[#22C55E] transition-all duration-500 ease-in-out"
+            style={{ width: "20%" }}
+          >
+          </div>
+        </div>
       </div>
     </div>
   );
