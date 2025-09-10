@@ -4,20 +4,15 @@ import Input from "../../Common/Input";
 import PurpleButton from "../../Common/PurpleButton";
 import { shakeAnimation } from "../../../Utils/shakeAnimation";
 
-function AddSubjectPopup() {
+function AddSubjectPopup({ setSubjects }) {
   const saveNewSubject = () => {
     const input = document.getElementById('add-subject');
     const name = input.value;
 
     // user enter name of subject
     if (name) { // input has name
-      let subjects = localStorage.getItem('subjects');
-      // creating subjects object in local storage if user add subject firs time
-      if (subjects === null) {
-        localStorage.setItem('subjects', JSON.stringify({}));
-      }
+      let subjects = JSON.parse(localStorage.getItem('subjects'));
 
-      subjects = JSON.parse(subjects);
       // check if there already subject with this name
       if (Object.hasOwn(subjects, name)) {
         shakeAnimation(input);
@@ -26,9 +21,10 @@ function AddSubjectPopup() {
 
         return;
       };
-      // add new subject in subjects in local storage
+      // add new subject in subjects in local storage and update subjects state
       subjects[name] = [];
       localStorage.setItem('subjects', JSON.stringify(subjects));
+      setSubjects(JSON.parse(localStorage.getItem('subjects')));
 
       closePopup();
     } else { // input empty
