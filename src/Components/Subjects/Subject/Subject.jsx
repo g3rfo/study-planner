@@ -2,8 +2,38 @@ import TaskButton from "./TaskButton";
 import Progress from "./Progress";
 import Task from "./Task";
 import Button from "../../Common/Button";
+import { useEffect, useState } from "react";
 
-function Subject( {title} ) {
+function Subject({ title, tasksList }) {
+  const [tasks, setTasks] = useState(tasksList);
+  const [doneTasksNum, setDoneTasksNum] = useState(0);
+
+  useEffect(() => {
+    let result = 0;
+    for (let task of tasks) {
+      if (task.done) result++;
+    }
+    setDoneTasksNum(result);
+  }, [tasks])
+
+
+  const showTasks = () => {
+    const tasksTemplate = [];
+
+    for (let task of tasks) {
+      tasksTemplate.push(
+        <Task key={task.title} subjectKey={title} title={task.title} status={task.done} setTasks={setTasks} />
+      );
+    }
+
+    return (tasksTemplate);
+  }
+
+  // const addNewTask = () => {
+
+  //   setTasks('');
+  // }
+
   return (
     <div className="rounded-xl overflow-hidden border border-[#F3F4F6] dark:border-[#374151] shadow-sm">
       <div className="box-border p-4 flex justify-between items-center h-15 bg-[#F9F4FF] dark:bg-[#2B2648] border-b border-[#F3E8FF] dark:border-[#581C87]">
@@ -14,9 +44,9 @@ function Subject( {title} ) {
         </div>
       </div>
       <div className="p-4 flex flex-col gap-5">
-        <Progress />
+        <Progress doneTasksNum={doneTasksNum} tasksNum={tasks.length}/>
         <div>
-          <Task />
+          {showTasks()}
         </div>
         <Button title='Add Task' src={'/AddIcon.svg'} w={'full'} h={10} />
       </div>

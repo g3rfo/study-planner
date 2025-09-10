@@ -1,11 +1,11 @@
 import ControlPanelTitle from "../Common/ControlPanelTitle";
 import AddSubjectButton from "./AddSubjectButton";
 
-function SubjectsControlPanel() {
+function SubjectsControlPanel({ setSubjects }) {
   return ( 
     <div className="h-10 w-full flex justify-between items-center">
       <ControlPanelTitle iconSource='/active/SubjectsIcon.svg' title='My Subjects' />
-      <AddSubjectButton />
+      <AddSubjectButton setSubjects={setSubjects} />
     </div>
   );
 }
