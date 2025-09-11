@@ -25,7 +25,7 @@ function Subjects() {
       <SubjectsControlPanel setSubjects={setSubjects}/>
       <div className="mt-6">
         {isEmpty && <EmptyContent setSubjects={setSubjects} />}
-        {!isEmpty && <Content subjects={subjects} />}
+        {!isEmpty && <Content subjects={subjects} setSubjects={setSubjects} />}
       </div>
     </div>
   );
