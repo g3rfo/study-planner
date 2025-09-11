@@ -1,4 +1,4 @@
-function TaskButton({ src, func = () => {} }) {
+function SubjectHandleButton({ src, func = () => {} }) {
   return (
     <button
       className="w-7 h-7 flex justify-center items-center cursor-pointer
@@ -10,4 +10,4 @@ function TaskButton({ src, func = () => {} }) {
   );
 }
 
-export default TaskButton;
+export default SubjectHandleButton;
