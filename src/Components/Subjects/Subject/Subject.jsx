@@ -4,8 +4,8 @@ import Task from "./Task";
 import Button from "../../Common/Button";
 import { useEffect, useState } from "react";
 
-function Subject({ title, tasksList }) {
-  const [tasks, setTasks] = useState(tasksList);
+function Subject({ title, subjects, setSubjects }) {
+  const [tasks, setTasks] = useState(subjects[title]);
   const [doneTasksNum, setDoneTasksNum] = useState(0);
 
   useEffect(() => {
@@ -16,6 +16,12 @@ function Subject({ title, tasksList }) {
     setDoneTasksNum(result);
   }, [tasks])
 
+  const deleteSubject = () => {
+    const newSubjects = { ...subjects };
+    delete newSubjects[title];
+    localStorage.setItem('subjects', JSON.stringify(newSubjects));
+    setSubjects(newSubjects);
+  }
 
   const showTasks = () => {
     const tasksTemplate = [];
@@ -40,7 +46,7 @@ function Subject({ title, tasksList }) {
         <h1 className="text-[16px] font-semibold text-[#7E22CE] dark:text-[#D8B4FE]">{title}</h1>
         <div className="flex gap-2">
           <TaskButton src={'/subject/EditNameIcon.svg'} />
-          <TaskButton src={'/subject/DeleteIcon.svg'}/>
+          <TaskButton src={'/subject/DeleteIcon.svg'} func={deleteSubject} />
         </div>
       </div>
       <div className="p-4 flex flex-col gap-5">

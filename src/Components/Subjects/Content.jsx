@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Subject from "./Subject/Subject";
 
-function Content({ subjects }) {
+function Content({ subjects, setSubjects }) {
   const [columnsNum, setColumnsNum] = useState(1);
   
   useEffect(() => {
@@ -22,7 +22,7 @@ function Content({ subjects }) {
   for (let key in subjects) {
     const columnIndex = num % columnsNum;
     columns[columnIndex].push(
-      <Subject key={key} title={key} tasksList={subjects[key]} />
+      <Subject key={key} title={key} subjects={subjects} setSubjects={setSubjects} />
     );
     num++;
   }
