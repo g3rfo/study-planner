@@ -1,5 +1,6 @@
 function InputHandleButtons({ submitFunc = () => {}, closeFunc = () => {}, h = '8' }) {
-  const buttonStyle = 'flex justify-center items-center cur cursor-pointer hover:scale-110 duration-150 h-full aspect-square';
+  const buttonStyle = 
+    'flex justify-center items-center cur cursor-pointer hover:scale-110 duration-150 h-full aspect-square';
 
   return (
     <div className={`flex rounded-r-lg h-${h}`}>
@@ -7,13 +8,21 @@ function InputHandleButtons({ submitFunc = () => {}, closeFunc = () => {}, h = '
         className={`${buttonStyle} bg-[#A855F7]`}
         onClick={() => submitFunc()}
       >
-        <img src={'/SubmitIcon.svg'} alt="" className="w-5 h-5"/>
+        <img
+          src={'/SubmitIcon.svg'}
+          alt=""
+          className="w-5 h-5"
+        />
       </button>
       <button
         className={`${buttonStyle} bg-white dark:bg-[#374151] rounded-r-lg`}
         onClick={() => closeFunc()}
       >
-        <img src={'/CloseIcon.svg'} alt="" className="w-5 h-5" />
+        <img
+          src={'/CloseIcon.svg'}
+          alt=""
+          className="w-5 h-5"
+        />
       </button>
     </div>
   );

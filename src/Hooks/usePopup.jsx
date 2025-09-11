@@ -12,8 +12,14 @@ export function usePopup() {
 
   const open = (innerElement) => {
     setContent(
-      <div className="fixed top-0 w-full h-screen flex justify-center items-center backdrop-blur-xs">
-        <div className="p-6 w-[clamp(250px,40%,450px)] h-fit bg-white dark:bg-[#1F2937] rounded-xl">
+      <div 
+        className="fixed top-0 w-full h-screen flex justify-center
+          items-center backdrop-blur-xs"
+      >
+        <div 
+          className="p-6 w-[clamp(250px,40%,450px)] h-fit bg-white 
+          dark:bg-[#1F2937] shadow-2xl rounded-xl box-border"
+        >
           {innerElement}
         </div>
       </div>

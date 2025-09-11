@@ -4,7 +4,7 @@ import EmptyContent from "./EmptyContent";
 import SubjectsControlPanel from "./SubjectsControlPanel";
 
 function Subjects() {
-  const [isEmpty, setIsEmpty] = useState(true);
+  const [empty, setEmpty] = useState(null);
   const [subjects, setSubjects] = useState(() => {
     if (localStorage.getItem('subjects') === null) {
       localStorage.setItem('subjects', JSON.stringify({}));
@@ -13,19 +13,26 @@ function Subjects() {
   });
 
   useEffect(() => {
-    if (Object.keys(subjects).length === 0) {
-      setIsEmpty(true);
-    } else {
-      setIsEmpty(false);
+    if (subjects !== null){
+      if (Object.keys(subjects).length === 0) {
+        setEmpty(true);
+      } else {
+        setEmpty(false);
+      }
     }
-  }, [subjects])
+  }, [subjects]);
 
   return ( 
     <div className="w-[80vw] max-w-[1560px] my-10">
       <SubjectsControlPanel setSubjects={setSubjects}/>
       <div className="mt-6">
-        {isEmpty && <EmptyContent setSubjects={setSubjects} />}
-        {!isEmpty && <Content subjects={subjects} setSubjects={setSubjects} />}
+        {!empty && 
+          <Content 
+          subjects={subjects}
+          setSubjects={setSubjects}
+          />
+        }
+        {empty && <EmptyContent setSubjects={setSubjects} />}
       </div>
     </div>
   );
