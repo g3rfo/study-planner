@@ -31,12 +31,20 @@ function Task({ title, status, subjectKey, setTasks}) {
   };
 
   return (
-    <div className="group flex justify-between gap-2 items-center text-[14px] font-normal text-[#6B7280] dark:text-[#9CA3AF] h-10 px-2.5 rounded-lg hover:bg-[#F9FAFB] dark:hover:bg-[#2B3544] duration-150">
+    <div
+      className="group flex justify-between gap-2 items-center text-[14px] font-normal
+        text-[#6B7280] dark:text-[#9CA3AF] h-10 px-2.5 rounded-lg hover:bg-[#F9FAFB]
+        dark:hover:bg-[#2B3544] duration-150"
+    >
       <button 
         className="cursor-pointer hover:scale-110 duration-150"
         onClick={checkTask}
       >
-        <img src={checked ? '/subject/CheckedIcon.svg' : '/subject/UncheckedIcon.svg'} alt="" className="w-5 h-5"/>
+        <img
+          src={checked ? '/subject/CheckedIcon.svg' : '/subject/UncheckedIcon.svg'} 
+          alt=""
+          className="w-5 h-5"
+        />
       </button>
       <div className={`w-[min(80%)] ${checked ? 'line-through' : null}`}>
         {title}
@@ -45,7 +53,10 @@ function Task({ title, status, subjectKey, setTasks}) {
         className="cursor-pointer hover:scale-110 duration-150 opacity-0 group-hover:opacity-100"
         onClick={deleteTask}
       >
-        <img src="/subject/DeleteIcon.svg" alt="" />
+        <img 
+          src="/subject/DeleteIcon.svg"
+          alt=""
+        />
       </button>
     </div>
   );

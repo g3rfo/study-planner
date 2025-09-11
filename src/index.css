@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+html {
+  min-width: 640px;
+}
+
 body {
   font-family: 'Inter', sans-serif;
 }

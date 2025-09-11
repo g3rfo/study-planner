@@ -11,6 +11,7 @@ function Subject({ title, subjects, setSubjects }) {
   const [tasks, setTasks] = useState(subjects[title]);
   const [doneTasksNum, setDoneTasksNum] = useState(0);
   const [isTitleChanging, setIsTitleChanging] = useState(false);
+  const [isTaskAdding, setIsTaskAdding] = useState(false);
 
   useEffect(() => {
     let result = 0;
@@ -32,25 +33,51 @@ function Subject({ title, subjects, setSubjects }) {
 
     for (let task of tasks) {
       tasksTemplate.push(
-        <Task key={task.title} subjectKey={title} title={task.title} status={task.done} setTasks={setTasks} />
+        <Task
+          key={task.title}
+          subjectKey={title}
+          title={task.title}
+          status={task.done}
+          setTasks={setTasks}
+        />
       );
     }
 
     return (tasksTemplate);
   }
 
-  // const addNewTask = () => {
+  const addNewTask = (inputId) => {
+    const task = document.getElementById(inputId).value;
+    let subjects = JSON.parse(localStorage.getItem('subjects'));
+    
+    subjects[title].push({title: task, done: false});
 
-  //   setTasks('');
-  // }
+    localStorage.setItem('subjects', JSON.stringify(subjects));
+    setTasks(JSON.parse(localStorage.getItem('subjects'))[title]);
+    setSubjects(JSON.parse(localStorage.getItem('subjects')));
+  }
 
   return (
-    <div className="rounded-xl overflow-hidden border border-[#F3F4F6] dark:border-[#374151] shadow-sm">
-      <div className="box-border p-4 flex justify-between items-center h-15 bg-[#F9F4FF] dark:bg-[#2B2648] border-b border-[#F3E8FF] dark:border-[#581C87]">
+    <div 
+      className="w-full rounded-xl overflow-hidden bg-white dark:bg-[#1F2937] border 
+      border-[#d5b5f7] dark:border-[#374151] shadow-xl"
+    >
+      <div
+        className="box-border p-4 flex justify-between items-center h-15 bg-[#F9F4FF]
+        dark:bg-[#2B2648] border-b border-[#d5b5f7] dark:border-[#581C87]"
+      >
         {!isTitleChanging ? 
-          <h1 className="text-[16px] font-semibold text-[#7E22CE] dark:text-[#D8B4FE]">{title}</h1> :
+          <h1 className="text-[16px] font-semibold text-[#7E22CE] dark:text-[#D8B4FE]">
+            {title}
+          </h1>
+          :
           <div className="flex justify-between items-center w-[75%]">
-            <Input id='change-title' placeholder={'Enter new name'} value={title} h={9}/>
+            <Input
+              id='change-title'
+              placeholder={'Enter new name'}
+              value={title}
+              h={9}
+            />
             <InputHandleButtons
               submitFunc={() => {
                 const isSaved = saveSubjectName('change-title', 'rename', setSubjects, title);
@@ -61,20 +88,53 @@ function Subject({ title, subjects, setSubjects }) {
           </div>
         }
         <div className="flex gap-2">
-          <SubjectHandleButton src={'/subject/EditNameIcon.svg'} func={() => {setIsTitleChanging(!isTitleChanging)}}/>
-          <SubjectHandleButton src={'/subject/DeleteIcon.svg'} func={deleteSubject} />
+          <SubjectHandleButton
+            src={'/subject/EditNameIcon.svg'}
+            func={() => {setIsTitleChanging(!isTitleChanging)}}
+          />
+          <SubjectHandleButton
+            src={'/subject/DeleteIcon.svg'}
+            func={deleteSubject}
+          />
         </div>
       </div>
       <div className="p-4 flex flex-col gap-5">
-        { subjects[title].length > 0 &&
+        {tasks.length > 0 &&
           <>
-            <Progress doneTasksNum={doneTasksNum} tasksNum={tasks.length}/>
+            <Progress
+              doneTasksNum={doneTasksNum}
+              tasksNum={tasks.length}
+            />
             <div>
               {showTasks()}
             </div>
           </>
         }
-        <Button title='Add Task' src={'/AddIcon.svg'} w={'full'} h={10} />
+        {!isTaskAdding ?
+          <Button 
+            title='Add Task'
+            src={'/AddIcon.svg'}
+            w={'full'}
+            h={10}
+            func={() => {setIsTaskAdding(!isTaskAdding)}}
+          /> 
+          :
+          <div className="flex justify-between items-center w-full">
+            <Input
+              id='add-task'
+              placeholder={'Enter new task'}
+              h={10}
+            />
+            <InputHandleButtons
+              submitFunc={() => {
+                addNewTask('add-task');
+                setIsTaskAdding(!isTaskAdding);
+              }}
+              closeFunc={() => {setIsTaskAdding(!isTaskAdding)}}
+              h={8}
+            />
+          </div>
+        }
       </div>
     </div>
   );

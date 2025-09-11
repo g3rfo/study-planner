@@ -5,7 +5,11 @@ function SubjectHandleButton({ src, func = () => {} }) {
         hover:bg-[#F9FAFB] dark:hover:bg-[#374151] rounded-md duration-150"
       onClick={() => func()}
     >
-      <img src={src} alt="" className="w-5 h-5"/>
+      <img
+        src={src}
+        alt=""
+        className="w-5 h-5"
+      />
     </button>
   );
 }
