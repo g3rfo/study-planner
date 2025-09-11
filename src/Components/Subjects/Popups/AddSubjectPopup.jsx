@@ -2,35 +2,11 @@ import { closePopup } from "../../../Hooks/usePopup";
 import Button from "../../Common/Button";
 import Input from "../../Common/Input";
 import PurpleButton from "../../Common/PurpleButton";
-import { shakeAnimation } from "../../../Utils/shakeAnimation";
+import { saveSubjectName } from "../../../Utils/saveSubjectName";
 
 function AddSubjectPopup({ setSubjects }) {
   const saveNewSubject = () => {
-    const input = document.getElementById('add-subject');
-    const name = input.value;
-
-    // user enter name of subject
-    if (name) { // input has name
-      let subjects = JSON.parse(localStorage.getItem('subjects'));
-
-      // check if there already subject with this name
-      if (Object.hasOwn(subjects, name)) {
-        shakeAnimation(input);
-        input.placeholder = 'This name already taken';
-        input.value = '';
-
-        return;
-      };
-      // add new subject in subjects in local storage and update subjects state
-      subjects[name] = [];
-      localStorage.setItem('subjects', JSON.stringify(subjects));
-      setSubjects(JSON.parse(localStorage.getItem('subjects')));
-
-      closePopup();
-    } else { // input empty
-      shakeAnimation(input);
-      input.placeholder = 'Enter at least one letter';
-    }
+    saveSubjectName('add-subject', 'save', setSubjects);
   }
 
   return (
@@ -45,8 +21,8 @@ function AddSubjectPopup({ setSubjects }) {
         </button>
       </div>
       <div className="mt-8">
-        <label htmlFor="add-subject" className="text-[14px] text-[#374151] dark:text-[#D1D5DB] font-light">Subject Name</label>
-        <Input id={'add-subject'} placeholder={'Add new subject name'} />
+        <label htmlFor="add-subject" className="mb-1 text-[14px] text-[#374151] dark:text-[#D1D5DB] font-light">Subject Name</label>
+        <Input id={'add-subject'} placeholder={'Add new subject name'} h={11} />
       </div>
       <div className="mt-8 flex justify-end gap-2">
         <Button title={'Cancel'} h={10} fs={16} func={closePopup}/>

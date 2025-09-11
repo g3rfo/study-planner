@@ -1,13 +1,14 @@
-function Input({ id, placeholder }) {
+function Input({ id, placeholder, value = '', h = 'full'}) {
   return (
     <input
       type="text"
       id={id}
       placeholder={placeholder}
-      className="transition-all box-border mt-1 pl-3 h-11 w-full bg-white dark:bg-[#374151]
+      defaultValue={value}
+      className={`transition-all focus:transition-none box-border pl-3 w-full h-${h} bg-white dark:bg-[#374151]
         shadow-sm rounded-lg text-[16px] text-[#374151] dark:text-[#CCCCCC] font-light
-        placeholder:text-[16px] focus:border-none focus:outline-3 dark:focus:outline-[#A855F7]
-        placeholder:text-[#CCCCCC] placeholder:font-light"
+        placeholder:text-[16px] focus:border-none focus:outline-3 focus:outline-[#A855F7]
+        placeholder:text-[#CCCCCC] placeholder:font-light`}
     />
   );
 }
