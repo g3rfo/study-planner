@@ -18,7 +18,7 @@ export function usePopup() {
       >
         <div 
           className="p-6 w-[clamp(250px,40%,450px)] h-fit bg-white 
-          dark:bg-[#1F2937] shadow-2xl rounded-xl box-border"
+          dark:bg-[#1F2937] shadow-2xl rounded-xl box-border fade-in-up"
         >
           {innerElement}
         </div>

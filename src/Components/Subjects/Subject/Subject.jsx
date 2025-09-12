@@ -60,7 +60,7 @@ function Subject({ title, subjects, setSubjects }) {
   return (
     <div 
       className="w-full rounded-xl overflow-hidden bg-white dark:bg-[#1F2937] border 
-      border-[#d5b5f7] dark:border-[#374151] shadow-xl"
+      border-[#d5b5f7] dark:border-[#374151] shadow-xl fade-in-up"
     >
       <div
         className="box-border p-4 flex justify-between items-center h-15 bg-[#F9F4FF]
