@@ -23,18 +23,21 @@ function AddSubjectPopup({ setSubjects }) {
           <img src="/CloseIcon.svg" alt="" className="w-6 h-6" />
         </button>
       </div>
-      <div className="mt-8 h-17">
-        <label 
-          htmlFor="add-subject"
-          className="mb-1 text-[14px] text-[#374151] dark:text-[#D1D5DB] font-light"
-        >
-          Subject Name
-        </label>
-        <Input
-          id={'add-subject'}
-          placeholder={'Add new subject name'}
-          h={11}
-        />
+      <div className="mt-8 h-18">
+        <div className="mb-1">
+          <label
+            htmlFor="add-subject"
+            className="text-[14px] text-[#374151] dark:text-[#D1D5DB] font-light"
+          >
+            Subject Name
+          </label>
+        </div>
+        <div className="h-11">
+          <Input
+            id={'add-subject'}
+            placeholder={'Add new subject name'}
+          />
+        </div>
       </div>
       <div className="mt-8 flex justify-end gap-2">
         <Button
