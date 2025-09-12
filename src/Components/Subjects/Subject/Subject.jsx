@@ -113,7 +113,8 @@ function Subject({ title, subjects, setSubjects }) {
         {!isTaskAdding ?
           <Button 
             title='Add Task'
-            src={'/AddIcon.svg'}
+            src={'/LightAddIcon.svg'}
+            darkSrc={'/AddIcon.svg'}
             w={'full'}
             h={10}
             func={() => {setIsTaskAdding(!isTaskAdding)}}

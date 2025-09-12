@@ -1,4 +1,4 @@
-function Button({ title, src = null, w, h, fs = 14, func = () => {}}) {
+function Button({ title, src = null, darkSrc = null, w, h, fs = 14, func = () => {}}) {
   return (
     <button 
       className={
@@ -8,7 +8,8 @@ function Button({ title, src = null, w, h, fs = 14, func = () => {}}) {
       }
       onClick={func}  
     >
-      {src ? <img src={src} alt="" className="h-[40%] aspect-square" /> : null}
+      {src ? <img src={src} alt="" className="h-[40%] aspect-square block dark:hidden" /> : null}
+      {darkSrc ? <img src={darkSrc} alt="" className="h-[40%] aspect-square hidden dark:block" /> : null}
       <h1 className={`text-[${fs}px] text-[#374151] dark:text-[#F9FAFB]`}>
         {title}
       </h1>
