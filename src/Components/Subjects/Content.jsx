@@ -7,7 +7,7 @@ function Content({ subjects, setSubjects }) {
   useEffect(() => {
     const handleResize = () => {
       const w = window.innerWidth;
-      setColumnsNum(w >= 1536 ? 3 : w >= 1280 ? 2 : 1);
+      setColumnsNum(w >= 1536 ? 3 : w >= 1024 ? 2 : 1);
     };
     
     handleResize();
@@ -35,7 +35,7 @@ function Content({ subjects, setSubjects }) {
   }
 
   return (
-    <div className="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-3">
+    <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-3">
       <div className="subjects-col-0 flex flex-col items-center gap-3">
         {columns[0]}
       </div>
