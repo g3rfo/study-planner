@@ -1,12 +1,12 @@
 import './App.css'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { HashRouter, Route, Routes } from 'react-router-dom'
 import Navbar from './Components/Navbar/Navbar'
 import Calendar from './Pages/Calendar/Calendar'
 import Subjects from './Pages/Subjects/Subjects'
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div className="flex flex-col items-center from-white to-white bg-gradient-to-b dark:from-[#1a2332] dark:to-[#040609] bg-no-repeat w-100% min-h-screen h-fit">
         <header className="w-full">
           <Navbar />
@@ -18,7 +18,7 @@ function App() {
           </Routes>
         </main>
       </div>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 
