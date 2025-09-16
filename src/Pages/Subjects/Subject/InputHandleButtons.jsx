@@ -19,7 +19,7 @@ function InputHandleButtons({ submitFunc = () => {}, closeFunc = () => {}, h = '
         onClick={() => closeFunc()}
       >
         <img
-          src={'/CloseIcon.svg'}
+          src={'/public/CloseIcon.svg'}
           alt=""
           className="w-5 h-5"
         />

@@ -38,7 +38,7 @@ function Navbar() {
           </Link>
           <Link to="/subjects">
             <PageButton
-              iconName="SubjectsIcon.svg"
+              iconName="/public/SubjectsIcon.svg"
               title="Subjects"
               curPage={curPage}
               setCurPage={setCurPage}
@@ -55,7 +55,7 @@ function Navbar() {
               duration-200 hover:scale-120"
             >
               <img
-                src={theme === 'dark' ? '/navbar/DarkThemeIcon.svg' : '/navbar/LightThemeIcon.svg'}
+                src={theme === 'dark' ? '/public/navbar/DarkThemeIcon.svg' : '/public/navbar/LightThemeIcon.svg'}
                 alt=""
                 className="w-6 h-6"
               />

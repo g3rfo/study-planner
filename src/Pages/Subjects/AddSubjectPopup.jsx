@@ -20,7 +20,7 @@ function AddSubjectPopup({ setSubjects }) {
           hover:bg-[#F9FAFB] hover:dark:bg-[#374151] duration-150"
           onClick={closePopup}
         >
-          <img src="/CloseIcon.svg" alt="" className="w-6 h-6" />
+          <img src="/public/CloseIcon.svg" alt="" className="w-6 h-6" />
         </button>
       </div>
       <div className="mt-8 h-18">

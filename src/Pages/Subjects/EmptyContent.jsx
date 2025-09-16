@@ -11,7 +11,7 @@ function EmptyContent({ setSubjects }) {
           bg-[#F3E8FF] dark:bg-[#9333EA]"
       >
         <img 
-          src="/active/SubjectsIcon.svg" 
+          src="/public/active/SubjectsIcon.svg" 
           alt="" 
           className="w-8 h-8"
         />
