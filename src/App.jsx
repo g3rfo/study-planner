@@ -1,8 +1,8 @@
 import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Navbar from './Components/Navbar/Navbar'
-import Calendar from './Components/Calendar/Calendar'
-import Subjects from './Components/Subjects/Subjects'
+import Calendar from './Pages/Calendar/Calendar'
+import Subjects from './Pages/Subjects/Subjects'
 
 function App() {
   return (
