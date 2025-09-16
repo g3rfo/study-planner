@@ -1,9 +1,9 @@
+import { useEffect, useState } from "react";
 import SubjectHandleButton from "./SubjectHandleButton";
 import Progress from "./Progress";
 import Task from "./Task";
-import Button from "../../Common/Button";
-import { useEffect, useState } from "react";
-import Input from "../../Common/Input";
+import Button from "../../../Components/Common/Button";
+import Input from "../../../Components/Common/Input";
 import InputHandleButtons from "./InputHandleButtons";
 import { saveSubjectName } from "../../../Utils/saveSubjectName";
 
@@ -67,7 +67,7 @@ function Subject({ title, subjects, setSubjects }) {
         dark:bg-[#2B2648] border-b border-[#d5b5f7] dark:border-[#581C87]"
       >
         {!isTitleChanging ? 
-          <h1 className="text-[16px] font-semibold text-[#7E22CE] dark:text-[#D8B4FE]">
+          <h1 className="text-[17px] font-semibold text-[#7E22CE] dark:text-[#D8B4FE]">
             {title}
           </h1>
           :

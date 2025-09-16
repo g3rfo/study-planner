@@ -32,7 +32,7 @@ function Task({ title, status, subjectKey, setTasks}) {
 
   return (
     <div
-      className="group flex justify-between gap-2 items-center text-[14px] font-normal
+      className="group flex justify-between gap-2 items-center text-[16px] font-semibold
         text-[#6B7280] dark:text-[#9CA3AF] h-10 px-2.5 rounded-lg hover:bg-[#F9FAFB]
         dark:hover:bg-[#2B3544] duration-150"
     >

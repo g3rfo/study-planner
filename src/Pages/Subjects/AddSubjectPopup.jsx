@@ -1,8 +1,8 @@
-import { closePopup } from "../../../Hooks/usePopup";
-import Button from "../../Common/Button";
-import Input from "../../Common/Input";
-import PurpleButton from "../../Common/PurpleButton";
-import { saveSubjectName } from "../../../Utils/saveSubjectName";
+import { closePopup } from "../../Hooks/usePopup";
+import Button from "../../Components/Common/Button";
+import Input from "../../Components/Common/Input";
+import PurpleButton from "../../Components/Common/PurpleButton";
+import { saveSubjectName } from "../../Utils/saveSubjectName";
 
 function AddSubjectPopup({ setSubjects }) {
   const saveNewSubject = () => {

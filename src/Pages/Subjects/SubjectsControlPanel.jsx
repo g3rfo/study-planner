@@ -1,4 +1,4 @@
-import ControlPanelTitle from "../Common/ControlPanelTitle";
+import ControlPanelTitle from "../../Components/Common/ControlPanelTitle";
 import AddSubjectButton from "./AddSubjectButton";
 
 function SubjectsControlPanel({ setSubjects }) {

@@ -1,6 +1,6 @@
 import { usePopup } from "../../Hooks/usePopup";
-import AddSubjectPopup from "./Popups/AddSubjectPopup";
-import PurpleButton from "../Common/PurpleButton";
+import AddSubjectPopup from "../Subjects/AddSubjectPopup";
+import PurpleButton from "../../Components/Common/PurpleButton";
 
 function AddSubjectButton({ setSubjects }) {
   const { open, PopupContainer } = usePopup();
