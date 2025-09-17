@@ -9,7 +9,7 @@ function InputHandleButtons({ submitFunc = () => {}, closeFunc = () => {}, h = '
         onClick={() => submitFunc()}
       >
         <img
-          src={'/SubmitIcon.svg'}
+          src={'./images/SubmitIcon.svg'}
           alt=""
           className="w-5 h-5"
         />
@@ -19,7 +19,7 @@ function InputHandleButtons({ submitFunc = () => {}, closeFunc = () => {}, h = '
         onClick={() => closeFunc()}
       >
         <img
-          src={'/CloseIcon.svg'}
+          src={'./images/CloseIcon.svg'}
           alt=""
           className="w-5 h-5"
         />

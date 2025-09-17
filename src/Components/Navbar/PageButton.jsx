@@ -10,7 +10,7 @@ function PageButton({ iconName, title, curPage, setCurPage }) {
   const [iconSource, setIconSource] = useState();
 
   useEffect(() => {
-    setIconSource(active ? `/active/${iconName}` : `/${iconName}`);
+    setIconSource(active ? `./images/active/${iconName}` : `./images/${iconName}`);
   }, [active, iconName]);
 
   return (

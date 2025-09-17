@@ -55,7 +55,7 @@ function Navbar() {
               duration-200 hover:scale-120"
             >
               <img
-                src={theme === 'dark' ? '/navbar/DarkThemeIcon.svg' : '/navbar/LightThemeIcon.svg'}
+                src={theme === 'dark' ? './images/navbar/DarkThemeIcon.svg' : './images/navbar/LightThemeIcon.svg'}
                 alt=""
                 className="w-6 h-6"
               />

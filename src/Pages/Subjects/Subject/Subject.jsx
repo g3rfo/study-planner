@@ -89,11 +89,11 @@ function Subject({ title, subjects, setSubjects }) {
         }
         <div className="flex gap-2">
           <SubjectHandleButton
-            src={'/subject/EditNameIcon.svg'}
+            src={'./images/subject/EditNameIcon.svg'}
             func={() => {setIsTitleChanging(!isTitleChanging)}}
           />
           <SubjectHandleButton
-            src={'/subject/DeleteIcon.svg'}
+            src={'./images/subject/DeleteIcon.svg'}
             func={deleteSubject}
           />
         </div>
@@ -113,8 +113,8 @@ function Subject({ title, subjects, setSubjects }) {
         {!isTaskAdding ?
           <Button 
             title='Add Task'
-            src={'/LightAddIcon.svg'}
-            darkSrc={'/AddIcon.svg'}
+            src={'./images/LightAddIcon.svg'}
+            darkSrc={'./images/AddIcon.svg'}
             w={'full'}
             h={10}
             func={() => {setIsTaskAdding(!isTaskAdding)}}

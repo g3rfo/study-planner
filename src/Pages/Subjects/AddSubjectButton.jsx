@@ -13,7 +13,7 @@ function AddSubjectButton({ setSubjects }) {
     <>
       <PurpleButton
         title='Add Subject'
-        src='/AddIcon.svg'
+        src='./images/AddIcon.svg'
         h={10}
         func={openPopup}
       />   
