@@ -41,7 +41,7 @@ function Task({ title, status, subjectKey, setTasks}) {
         onClick={checkTask}
       >
         <img
-          src={checked ? '/public/subject/CheckedIcon.svg' : '/public/subject/UncheckedIcon.svg'} 
+          src={checked ? './images/subject/CheckedIcon.svg' : './images/subject/UncheckedIcon.svg'} 
           alt=""
           className="w-5 h-5"
         />
@@ -54,7 +54,7 @@ function Task({ title, status, subjectKey, setTasks}) {
         onClick={deleteTask}
       >
         <img 
-          src="/public/subject/DeleteIcon.svg"
+          src="./images/subject/DeleteIcon.svg"
           alt=""
         />
       </button>
