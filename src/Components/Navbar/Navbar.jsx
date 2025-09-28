@@ -38,7 +38,7 @@ function Navbar() {
           </Link>
           <Link to="/subjects">
             <PageButton
-              iconName="/public/SubjectsIcon.svg"
+              iconName="SubjectsIcon.svg"
               title="Subjects"
               curPage={curPage}
               setCurPage={setCurPage}
