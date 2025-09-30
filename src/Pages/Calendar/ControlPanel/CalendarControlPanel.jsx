@@ -6,7 +6,7 @@ import SwitchDateBar from "./SwitchDateBar";
 
 function CalendarControlPanel() {
   return (
-    <div className="px-6 h-23 w-full flex justify-between items-center bg-white dark:bg-[#111827] rounded-t-2xl border-b border-[#dde1e9] dark:border-[#6d6f72] box-border">
+    <div className="px-6 h-23 w-full flex justify-between items-center bg-[#abcefd] dark:bg-[#1F2D4D]">
       <ControlPanelTitle
         iconSource='./images/active/CalendarIcon.svg' 
         title='Weekly Schedule'
