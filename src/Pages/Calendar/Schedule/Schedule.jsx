@@ -1,3 +1,4 @@
+import CurrentTime from "./CurrentTime";
 import Dates from "./Dates/Dates";
 import Days from "./Days/Days";
 import Timeline from "./Timeline/Timeline";
@@ -18,7 +19,10 @@ function Schedule() {
       <div className="h-full overflow-x-auto custom-scrollbar">
         <div className="w-[2080px] h-full flex flex-col">
           <Dates />
-          <Days />
+          <div className="h-[90%] relative">
+            <CurrentTime />
+            <Days />
+          </div>
         </div>
       </div>
     </div>
