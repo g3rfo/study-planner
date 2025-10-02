@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 function CurrentTime() {
   const [time, setTime] = useState(new Date());
-  const scheduleHeight = 648;
+  const scheduleHeight = 956;
   const startTimeInSeconds = 21600; // 6:00
   const endTimeInSeconds = 79200; // 22:00
   
