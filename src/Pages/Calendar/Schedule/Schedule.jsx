@@ -6,7 +6,7 @@ import Timeline from "./Timeline/Timeline";
 function Schedule() {
   return (
     <div
-      className="w-full flex h-180 bg-white dark:bg-[#1F2937] overflow-hidden
+      className="w-full flex h-260 bg-white dark:bg-[#1F2937] overflow-hidden
         border-t border-[#dde1e9] dark:border-[#6d6f72]"
     >
       <div
@@ -19,7 +19,7 @@ function Schedule() {
       <div className="h-full overflow-x-auto custom-scrollbar">
         <div className="w-[2080px] h-full flex flex-col">
           <Dates />
-          <div className="h-[90%] relative">
+          <div className="h-[92%] relative">
             <CurrentTime />
             <Days />
           </div>

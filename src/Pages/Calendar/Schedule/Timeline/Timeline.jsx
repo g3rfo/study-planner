@@ -3,8 +3,8 @@ import TimeRange from "./TimeRange";
 function Timeline() {
   return (
     <>
-      <div className="h-[calc(10%-1px)]"></div>
-      <div className="h-[90%] grid grid-rows-8">
+      <div className="h-[calc(8%-1px)]"></div>
+      <div className="h-[92%] grid grid-rows-8">
         <TimeRange start={1} end={2} time={'6:00'} />
         <TimeRange start={2} end={3} time={'8:00'} />
         <TimeRange start={3} end={4} time={'10:00'} />

@@ -2,7 +2,7 @@ import Day from "./Day";
 
 function Dates() {
   return (
-    <div className="flex h-[10%]">
+    <div className="flex h-[8%]">
       <Day day={'Monday'} date={'29'} />
       <Day day={'Tuesday'} date={'30'} />
       <Day day={'Wednesday'} date={'1'} />
