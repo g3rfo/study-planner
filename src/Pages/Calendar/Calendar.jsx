@@ -39,10 +39,11 @@ function Calendar() {
   const [currentWeekName, setCurrentWeekName] = useState('week3');
   const [currentWeek, setCurrentWeek] = useState({});
   const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  
   useEffect(() => {
     const today = new Date();
     let newCalendar = {};
-
+    
     if (localStorage.getItem('calendar') === null) {
       
       for (let i = 0; i < 7; i++) {
@@ -63,12 +64,59 @@ function Calendar() {
           sun: { date: null, lessons: [] },
         };
       }
-
-      localStorage.setItem('calendar', JSON.stringify(newCalendar));
     } else {
       newCalendar = JSON.parse(localStorage.getItem('calendar'));
+      const currentDay = today.valueOf();
+      let mainWeekNumber = 3;
+
+      for (let i = mainWeekNumber; i < 7; i++) {
+        const week = newCalendar[`week${i}`];
+        const startDay = new Date(week.startDate).valueOf();
+        const endDay = new Date(week.endDate).valueOf();
+
+        if (startDay <= currentDay && currentDay <= endDay) {
+          mainWeekNumber = i;
+          break;
+        } else {
+          mainWeekNumber++;
+        }
+      }
+
+      console.log('MainWeekNumber: ', mainWeekNumber);
+
+      if(mainWeekNumber > 3) {
+        const weeksToCopy = [];
+
+        for(let i = mainWeekNumber - 3; i < 7; i++) {
+          weeksToCopy.push({ ...newCalendar[`week${i}`] });
+        }
+
+        for (let i = 0; i < mainWeekNumber - 3; i++) {
+          const date = new Date(today);
+          date.setDate(date.getDate() + (7 + 7 * i));
+          
+          const [startDate, endDate] = getWeekDateRange(date);
+
+          weeksToCopy.push({
+            startDate,
+            endDate,
+            mon: { date: null, lessons: [] },
+            tue: { date: null, lessons: [] },
+            wed: { date: null, lessons: [] },
+            thu: { date: null, lessons: [] },
+            fri: { date: null, lessons: [] },
+            sat: { date: null, lessons: [] },
+            sun: { date: null, lessons: [] },
+          });
+        }
+
+        for(let i = 0; i < 7; i++) {
+          newCalendar[`week${i}`] = weeksToCopy[i];
+        }
+      }
     }
 
+    localStorage.setItem('calendar', JSON.stringify(newCalendar));
     setCalendar(newCalendar);
   }, []);
 
@@ -89,6 +137,8 @@ function Calendar() {
 
     return [startOfWeek, endOfWeek];
   }
+
+
 
   const startDate = currentWeek.startDate ? new Date(currentWeek.startDate) : null;
   const endDate = currentWeek.endDate ? new Date(currentWeek.endDate) : null;
