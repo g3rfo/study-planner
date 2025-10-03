@@ -3,7 +3,7 @@ import Dates from "./Dates/Dates";
 import Days from "./Days/Days";
 import Timeline from "./Timeline/Timeline";
 
-function Schedule() {
+function Schedule({ currentWeek }) {
   return (
     <div
       className="w-full flex h-260 bg-white dark:bg-[#1F2937] overflow-hidden
