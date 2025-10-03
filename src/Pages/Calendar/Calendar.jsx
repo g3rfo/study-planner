@@ -44,26 +44,30 @@ function Calendar() {
     const today = new Date();
     let newCalendar = {};
     
-    if (localStorage.getItem('calendar') === null) {
-      
+    const fillWithEmptyWeeks = () => {
       for (let i = 0; i < 7; i++) {
         const date = new Date(today);
         date.setDate(date.getDate() + (-21 + 7 * i));
         
         const [startDate, endDate] = getWeekDateRange(date);
-
+        const dayTime = 24 * 60 * 60 * 1000;
+        
         newCalendar[`week${i}`] = {
           startDate,
           endDate,
-          mon: { date: null, lessons: [] },
-          tue: { date: null, lessons: [] },
-          wed: { date: null, lessons: [] },
-          thu: { date: null, lessons: [] },
-          fri: { date: null, lessons: [] },
-          sat: { date: null, lessons: [] },
-          sun: { date: null, lessons: [] },
+          mon: { date: new Date(startDate), lessons: [] },
+          tue: { date: new Date(startDate.getTime() + 1 * dayTime), lessons: [] },
+          wed: { date: new Date(startDate.getTime() + 2 * dayTime), lessons: [] },
+          thu: { date: new Date(startDate.getTime() + 3 * dayTime), lessons: [] },
+          fri: { date: new Date(startDate.getTime() + 4 * dayTime), lessons: [] },
+          sat: { date: new Date(startDate.getTime() + 5 * dayTime), lessons: [] },
+          sun: { date: new Date(startDate.getTime() + 6 * dayTime), lessons: [] },
         };
       }
+    }
+
+    if (localStorage.getItem('calendar') === null) {
+      fillWithEmptyWeeks();
     } else {
       newCalendar = JSON.parse(localStorage.getItem('calendar'));
       const currentDay = today.valueOf();
@@ -82,9 +86,9 @@ function Calendar() {
         }
       }
 
-      console.log('MainWeekNumber: ', mainWeekNumber);
-
-      if(mainWeekNumber > 3) {
+      if (mainWeekNumber === 7) {
+        fillWithEmptyWeeks();
+      } else if(mainWeekNumber > 3) {
         const weeksToCopy = [];
 
         for(let i = mainWeekNumber - 3; i < 7; i++) {
@@ -100,13 +104,13 @@ function Calendar() {
           weeksToCopy.push({
             startDate,
             endDate,
-            mon: { date: null, lessons: [] },
-            tue: { date: null, lessons: [] },
-            wed: { date: null, lessons: [] },
-            thu: { date: null, lessons: [] },
-            fri: { date: null, lessons: [] },
-            sat: { date: null, lessons: [] },
-            sun: { date: null, lessons: [] },
+            mon: { date: startDate.getDate(), lessons: [] },
+            tue: { date: startDate.getDate() + 1, lessons: [] },
+            wed: { date: startDate.getDate() + 2, lessons: [] },
+            thu: { date: startDate.getDate() + 3, lessons: [] },
+            fri: { date: startDate.getDate() + 4, lessons: [] },
+            sat: { date: startDate.getDate() + 5, lessons: [] },
+            sun: { date: startDate.getDate() + 6, lessons: [] },
           });
         }
 
@@ -126,7 +130,6 @@ function Calendar() {
       console.log(week);
       setCurrentWeek(week);
     }
-    
   }, [calendar, currentWeekName]);
 
   const getWeekDateRange = (date) => {
@@ -137,8 +140,6 @@ function Calendar() {
 
     return [startOfWeek, endOfWeek];
   }
-
-
 
   const startDate = currentWeek.startDate ? new Date(currentWeek.startDate) : null;
   const endDate = currentWeek.endDate ? new Date(currentWeek.endDate) : null;
