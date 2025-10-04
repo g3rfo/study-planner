@@ -37,7 +37,7 @@ function Task({ title, status, subjectKey, setTasks}) {
         dark:hover:bg-[#2B3544] duration-150"
     >
       <button 
-        className="cursor-pointer hover:scale-110 duration-150"
+        className="cursor-pointer hover:scale-110 duration-150 outline-none"
         onClick={checkTask}
       >
         <img
@@ -50,7 +50,7 @@ function Task({ title, status, subjectKey, setTasks}) {
         {title}
       </div>
       <button
-        className="cursor-pointer hover:scale-110 duration-150 opacity-0 group-hover:opacity-100"
+        className="cursor-pointer hover:scale-110 duration-150 opacity-0 group-hover:opacity-100 outline-none"
         onClick={deleteTask}
       >
         <img 

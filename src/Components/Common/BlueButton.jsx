@@ -3,7 +3,7 @@ function BlueButton({ title, src = null, w = 'auto', h, func}) {
     <button
         className={
           `px-4 w-${w} h-${h} bg-gradient-to-r from-[#3A81F6] to-[#2563EB] hover:to-[#1D4FD9]
-          transition-colors duration-100 rounded-lg text-[16px] text-white cursor-pointer`
+          transition-colors duration-100 rounded-lg text-[16px] text-white cursor-pointer outline-none`
         }
         onClick={() => func()}
       >

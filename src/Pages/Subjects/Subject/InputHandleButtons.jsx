@@ -1,6 +1,6 @@
 function InputHandleButtons({ submitFunc = () => {}, closeFunc = () => {}, h = '8' }) {
   const buttonStyle = 
-    'flex justify-center items-center cur cursor-pointer hover:scale-110 duration-150 h-full aspect-square';
+    'flex justify-center items-center cur cursor-pointer hover:scale-110 duration-150 h-full aspect-square outline-none';
 
   return (
     <div className={`flex rounded-r-lg h-${h}`}>

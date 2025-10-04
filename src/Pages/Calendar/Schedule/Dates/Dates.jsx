@@ -8,15 +8,18 @@ function Dates({ startDate }) {
     dates.push(nextDate.getDate());
   }
 
+  const date = new Date();
+  const today = date.getDate();
+
   return (
     <div className="flex h-[8%]">
-      <Day day={'Monday'} date={dates[0]} />
-      <Day day={'Tuesday'} date={dates[1]} />
-      <Day day={'Wednesday'} date={dates[2]} />
-      <Day day={'Thursday'} date={dates[3]} />
-      <Day day={'Friday'} date={dates[4]} />
-      <Day day={'Saturday'} date={dates[5]} />
-      <Day day={'Sunday'} date={dates[6]} />
+      <Day isToday={today === dates[0] ? true : false} day={'Monday'} date={dates[0]} />
+      <Day isToday={today === dates[1] ? true : false} day={'Tuesday'} date={dates[1]} />
+      <Day isToday={today === dates[2] ? true : false} day={'Wednesday'} date={dates[2]} />
+      <Day isToday={today === dates[3] ? true : false} day={'Thursday'} date={dates[3]} />
+      <Day isToday={today === dates[4] ? true : false} day={'Friday'} date={dates[4]} />
+      <Day isToday={today === dates[5] ? true : false} day={'Saturday'} date={dates[5]} />
+      <Day isToday={today === dates[6] ? true : false} day={'Sunday'} date={dates[6]} />
     </div>
   );
 }

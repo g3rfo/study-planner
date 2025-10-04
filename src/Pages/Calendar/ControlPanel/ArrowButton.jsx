@@ -2,8 +2,8 @@ function ArrowButton({isDisabled = false, direction, onClick }) {
   return (
     <button
       disabled={isDisabled}
-      className="w-9 h-9 flex justify-center items-center cursor-pointer
-        hover:bg-white dark:hover:bg-[#374151] rounded-lg duration-150"
+      className="w-9 h-9 flex justify-center items-center cursor-pointer hover:bg-white
+      dark:hover:bg-[#374151] rounded-lg duration-150 outline-none"
       onClick={() => {onClick()}}
     >
         <img

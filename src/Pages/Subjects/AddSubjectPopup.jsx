@@ -17,7 +17,7 @@ function AddSubjectPopup({ setSubjects }) {
         </h1>
         <button
           className="flex justify-center items-center w-7 h-7 cursor-pointer rounded-full
-          hover:bg-[#F9FAFB] hover:dark:bg-[#374151] duration-150"
+          hover:bg-[#F9FAFB] hover:dark:bg-[#374151] duration-150 outline-none"
           onClick={closePopup}
         >
           <img src="./images/CloseIcon.svg" alt="" className="w-6 h-6" />
