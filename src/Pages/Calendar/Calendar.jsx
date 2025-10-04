@@ -33,6 +33,7 @@ import Schedule from "./Schedule/Schedule";
 //   week5 : {},
 //   week6 : {},
 // }
+const dayTime = 24 * 60 * 60 * 1000;
 
 function Calendar() {
   const [calendar, setCalendar] = useState(null);
@@ -50,20 +51,24 @@ function Calendar() {
         date.setDate(date.getDate() + (-21 + 7 * i));
         
         const [startDate, endDate] = getWeekDateRange(date);
-        const dayTime = 24 * 60 * 60 * 1000;
         
-        newCalendar[`week${i}`] = {
-          startDate,
-          endDate,
-          mon: { date: new Date(startDate), lessons: [] },
-          tue: { date: new Date(startDate.getTime() + 1 * dayTime), lessons: [] },
-          wed: { date: new Date(startDate.getTime() + 2 * dayTime), lessons: [] },
-          thu: { date: new Date(startDate.getTime() + 3 * dayTime), lessons: [] },
-          fri: { date: new Date(startDate.getTime() + 4 * dayTime), lessons: [] },
-          sat: { date: new Date(startDate.getTime() + 5 * dayTime), lessons: [] },
-          sun: { date: new Date(startDate.getTime() + 6 * dayTime), lessons: [] },
-        };
+        
+        newCalendar[`week${i}`] = getEmptyWeek(startDate, endDate);
       }
+    }
+
+    const getEmptyWeek = (startDate, endDate) => {
+      return {
+        startDate,
+        endDate,
+        mon: { date: new Date(startDate), lessons: [] },
+        tue: { date: new Date(startDate.getTime() + 1 * dayTime), lessons: [] },
+        wed: { date: new Date(startDate.getTime() + 2 * dayTime), lessons: [] },
+        thu: { date: new Date(startDate.getTime() + 3 * dayTime), lessons: [] },
+        fri: { date: new Date(startDate.getTime() + 4 * dayTime), lessons: [] },
+        sat: { date: new Date(startDate.getTime() + 5 * dayTime), lessons: [] },
+        sun: { date: new Date(startDate.getTime() + 6 * dayTime), lessons: [] },
+      };
     }
 
     if (localStorage.getItem('calendar') === null) {
@@ -101,17 +106,7 @@ function Calendar() {
           
           const [startDate, endDate] = getWeekDateRange(date);
 
-          weeksToCopy.push({
-            startDate,
-            endDate,
-            mon: { date: startDate.getDate(), lessons: [] },
-            tue: { date: startDate.getDate() + 1, lessons: [] },
-            wed: { date: startDate.getDate() + 2, lessons: [] },
-            thu: { date: startDate.getDate() + 3, lessons: [] },
-            fri: { date: startDate.getDate() + 4, lessons: [] },
-            sat: { date: startDate.getDate() + 5, lessons: [] },
-            sun: { date: startDate.getDate() + 6, lessons: [] },
-          });
+          weeksToCopy.push(getEmptyWeek(startDate, endDate));
         }
 
         for(let i = 0; i < 7; i++) {
