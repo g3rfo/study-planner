@@ -18,7 +18,7 @@ function Schedule({ currentWeek }) {
       </div>
       <div className="h-full overflow-x-auto custom-scrollbar">
         <div className="w-[2080px] h-full flex flex-col">
-          <Dates />
+          <Dates startDate={new Date(currentWeek.startDate)} />
           <div className="h-[92%] relative">
             <CurrentTime />
             <Days />

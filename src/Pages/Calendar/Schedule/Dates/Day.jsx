@@ -7,7 +7,7 @@ function Day({ day, date }) {
     >
       {day}
       <div className="w-8 border-t-[1px] border-[#1F2937] dark:border-white"></div>
-      {date}
+      {date ? date : null}
     </div>
   );
 }
