@@ -16,7 +16,7 @@ function PageButton({ iconName, title, curPage, setCurPage }) {
   return (
     <button
       className={`cursor-pointer flex justify-center items-center gap-1.5 w-30 h-9
-        hover:rounded-[16px] hover:bg-white hover:dark:bg-[#4B5563]
+        hover:rounded-[16px] hover:bg-white hover:dark:bg-[#4B5563] outline-none
         ${active ? buttonBg : 'bg-none'}
       `}
       onClick={() => setCurPage(title)}

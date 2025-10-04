@@ -47,7 +47,7 @@ function Navbar() {
         </div>
         <button
             className="order-1 md:order-2 justify-self-end flex justify-center items-center w-10 h-10 
-            bg-[#F3F4F6] dark:bg-[#374151] rounded-full cursor-pointer"
+            bg-[#F3F4F6] dark:bg-[#374151] rounded-full cursor-pointer outline-none"
             onClick={toggleTheme}
           >
             <div

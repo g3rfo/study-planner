@@ -3,7 +3,7 @@ function PurpleButton({ title, src = null, w = 'auto', h, func = () => {}}) {
     <button
         className={
           `px-4 w-${w} h-${h} bg-gradient-to-r from-[#A855F7] to-[#9333EA] hover:to-[#7E22CE]
-          transition-colors duration-100 rounded-lg text-[16px] text-white cursor-pointer`
+          transition-colors duration-100 rounded-lg text-[16px] text-white cursor-pointer outline-none`
         }
         onClick={() => func()}
       >

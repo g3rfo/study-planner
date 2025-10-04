@@ -1,8 +1,8 @@
 function SubjectHandleButton({ src, func = () => {} }) {
   return (
     <button
-      className="w-7 h-7 flex justify-center items-center cursor-pointer
-        hover:bg-[#F9FAFB] dark:hover:bg-[#374151] rounded-md duration-150"
+      className="w-7 h-7 flex justify-center items-center cursor-pointer hover:bg-[#F9FAFB]
+        dark:hover:bg-[#374151] rounded-md duration-150 outline-none"
       onClick={() => func()}
     >
       <img

@@ -4,7 +4,7 @@ function Button({ title, src = null, darkSrc = null, w, h, fs = 14, func = () =>
       className={
         `px-4 flex justify-center items-center gap-1 w-${w} h-${h}
         hover:bg-[#F9FAFB] hover:dark:bg-[#374151] border border-[#D1D5DB] 
-        dark:border-[#4B5563] rounded-lg duration-150 cursor-pointer`
+        dark:border-[#4B5563] rounded-lg duration-150 cursor-pointer outline-none`
       }
       onClick={func}  
     >
