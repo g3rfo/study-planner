@@ -120,14 +120,18 @@ function Calendar() {
       }
     }
 
-    localStorage.setItem('calendar', JSON.stringify(newCalendar));
     setCalendar(newCalendar);
   }, []);
 
   useEffect(() => {
     if (calendar) {
+      localStorage.setItem('calendar', JSON.stringify(calendar));
+    }
+  }, [calendar])
+
+  useEffect(() => {
+    if (calendar) {
       const week = calendar[currentWeekName];
-      console.log(week);
       setCurrentWeek(week);
     }
   }, [calendar, currentWeekName]);
