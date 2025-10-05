@@ -1,6 +1,6 @@
 import ArrowButton from "./ArrowButton";
 
-function SwitchDateBar({ currentWeekName, setCurrentWeekName, startDate, endDate }) {
+function SwitchDateBar({ currentWeekName, setCurrentWeekName, startDate = '', endDate = ''}) {
   const weekNum = parseInt(currentWeekName.replace('week', ''), 10);
 
   return ( 
@@ -11,11 +11,11 @@ function SwitchDateBar({ currentWeekName, setCurrentWeekName, startDate, endDate
         onClick={() => {
           setCurrentWeekName(`week${weekNum - 1}`);
         }} 
-      />
-      <div className="w-40 text-center text-[16px] text-[#374151] dark:text-white">
-        {startDate} - {endDate}
-      </div>
-      <ArrowButton
+          />
+            <div className="w-40 text-center text-[16px] text-[#374151] dark:text-white">
+              {startDate ? startDate : ''} - {endDate ? endDate : ''}
+            </div>
+            <ArrowButton
         isDisabled={currentWeekName === 'week6'}
         direction="Right"
         onClick={() => {

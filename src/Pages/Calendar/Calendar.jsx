@@ -39,7 +39,6 @@ function Calendar() {
   const [calendar, setCalendar] = useState(null);
   const [currentWeekName, setCurrentWeekName] = useState('week3');
   const [currentWeek, setCurrentWeek] = useState({});
-  const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   
   useEffect(() => {
     const today = new Date();
@@ -132,24 +131,27 @@ function Calendar() {
   }, [calendar, currentWeekName]);
 
   const getWeekDateRange = (date) => {
-    const startOfWeek = new Date(date);
-    startOfWeek.setDate(date.getDate() - date.getDay() + 1); // Monday
-    const endOfWeek = new Date(date);
-    endOfWeek.setDate(date.getDate() - date.getDay() + 7); // Sunday
+    const localDate = new Date(date.getFullYear(), date.getMonth(), date.getDate()); // remove time part
+    const day = localDate.getDay() || 7; // Sunday -> 7
+    const monday = new Date(localDate);
+    monday.setDate(localDate.getDate() - day + 1);
+    const sunday = new Date(monday);
+    sunday.setDate(monday.getDate() + 6);
+    return [monday, sunday];
+  };
 
-    return [startOfWeek, endOfWeek];
-  }
-
-  const startDate = currentWeek.startDate ? new Date(currentWeek.startDate) : null;
-  const endDate = currentWeek.endDate ? new Date(currentWeek.endDate) : null;
+  const startDate = new Date(currentWeek.startDate);
+  const endDate = new Date(currentWeek.endDate);
+  // const startDate = currentWeek.startDate ? new Date(currentWeek.startDate) : null;
+  // const endDate = currentWeek.endDate ? new Date(currentWeek.endDate) : null;
 
   return (
     <div className="w-[80vw] max-w-[1560px] my-10 shadow-xl overflow-hidden rounded-2xl fade-in-up">
       <CalendarControlPanel
         currentWeekName={currentWeekName}
         setCurrentWeekName={setCurrentWeekName}
-        startDate={startDate ? `${monthNames[startDate.getMonth()]} ${startDate.getDate()}` : ""}
-        endDate={endDate ? `${monthNames[endDate.getMonth()]} ${endDate.getDate()}` : ""}
+        startDate={startDate}
+        endDate={endDate}
       />
       <Schedule currentWeek={currentWeek}/>
     </div>
