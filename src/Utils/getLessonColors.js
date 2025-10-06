@@ -1,7 +1,6 @@
 export const getLessonColors = () => {
-
   return {
-    pink: {bg: '#ee6cb8e6', b: '#ee6cb8'},
+    pink: {bg: '#ee9bcbe6', b: '#ee9bcb'},
     red: {bg: '#d82929b0', b: '#d82929'},
     orange: {bg: '#f19115d0', b: '#f19115'},
     yellow: {bg: '#f1db15c0', b: '#f1db15'},
