@@ -100,7 +100,7 @@ function Calendar() {
         }
 
         for (let i = 0; i < mainWeekNumber - 3; i++) {
-          const date = new Date(today);
+          const date = new Date(weeksToCopy[weeksToCopy.length - 1].startDate);
           date.setDate(date.getDate() + (7 + 7 * i));
           
           const [startDate, endDate] = getWeekDateRange(date);
