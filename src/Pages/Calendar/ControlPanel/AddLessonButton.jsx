@@ -2,11 +2,11 @@ import { usePopup } from "../../../Hooks/usePopup";
 import AddLessonPopup from "./AddLessonPopup";
 import BlueButton from "../../../Components/Common/BlueButton";
 
-function AddLessonButton() {
+function AddLessonButton({ startDate = null, endDate = null }) {
   const { open, PopupContainer } = usePopup();
 
   const openPopup = () => {
-    open(<AddLessonPopup />);
+    open(<AddLessonPopup startDate={startDate} endDate={endDate}/>);
   }
 
   return (

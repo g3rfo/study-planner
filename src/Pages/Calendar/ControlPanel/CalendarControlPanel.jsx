@@ -3,8 +3,9 @@ import AddLessonButton from "./AddLessonButton";
 import SaveScheduleButton from "./SaveScheduleButton";
 import SwitchDateBar from "./SwitchDateBar";
 
+const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-function CalendarControlPanel({ currentWeekName, setCurrentWeekName, startDate, endDate }) {
+function CalendarControlPanel({ currentWeekName, setCurrentWeekName, startDate = null, endDate = null }) {
   return (
     <div className="px-6 h-23 w-full flex justify-between items-center bg-[#abcefd] dark:bg-[#1F2D4D]">
       <ControlPanelTitle
@@ -16,11 +17,11 @@ function CalendarControlPanel({ currentWeekName, setCurrentWeekName, startDate, 
         <SwitchDateBar
           currentWeekName={currentWeekName}
           setCurrentWeekName={setCurrentWeekName}
-          startDate={startDate}
-          endDate={endDate}
+          startDate={`${monthNames[startDate.getMonth()]} ${startDate.getDate()}`}
+          endDate={`${monthNames[endDate.getMonth()]} ${endDate.getDate()}`}
         />
         <SaveScheduleButton />
-        <AddLessonButton />
+        <AddLessonButton startDate={startDate} endDate={endDate}/>
       </div>
     </div>
   );

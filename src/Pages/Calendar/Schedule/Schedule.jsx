@@ -19,7 +19,7 @@ function Schedule({ currentWeek }) {
       <div className="h-full overflow-x-auto custom-scrollbar">
         <div className="w-[2080px] h-full flex flex-col">
           <Dates startDate={new Date(currentWeek.startDate)} />
-          <div className="h-[92%] relative">
+          <div className="h-[92%] relative overflow-y-hidden">
             <CurrentTime />
             <Days />
           </div>
