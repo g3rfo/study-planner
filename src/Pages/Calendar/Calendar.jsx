@@ -10,10 +10,11 @@ import Schedule from "./Schedule/Schedule";
 //       date: null,
 //       lessons : [
 //         {
+//           id:          
 //           startTime: null,
 //           endTime: null,
 //           title: null,
-//           description: null,
+//           notes: null,
 //           link: null,
 //           color: null
 //         }
@@ -50,7 +51,6 @@ function Calendar() {
         date.setDate(date.getDate() + (-21 + 7 * i));
         
         const [startDate, endDate] = getWeekDateRange(date);
-        
         
         newCalendar[`week${i}`] = getEmptyWeek(startDate, endDate);
       }
@@ -102,7 +102,6 @@ function Calendar() {
         for (let i = 0; i < mainWeekNumber - 3; i++) {
           const date = new Date(weeksToCopy[weeksToCopy.length - 1].startDate);
           date.setDate(date.getDate() + (7 + 7 * i));
-          
           const [startDate, endDate] = getWeekDateRange(date);
 
           weeksToCopy.push(getEmptyWeek(startDate, endDate));
@@ -131,7 +130,7 @@ function Calendar() {
   }, [calendar, currentWeekName]);
 
   const getWeekDateRange = (date) => {
-    const localDate = new Date(date.getFullYear(), date.getMonth(), date.getDate()); // remove time part
+    const localDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0, 0);
     const day = localDate.getDay() || 7; // Sunday -> 7
     const monday = new Date(localDate);
     monday.setDate(localDate.getDate() - day + 1);
@@ -142,14 +141,13 @@ function Calendar() {
 
   const startDate = new Date(currentWeek.startDate);
   const endDate = new Date(currentWeek.endDate);
-  // const startDate = currentWeek.startDate ? new Date(currentWeek.startDate) : null;
-  // const endDate = currentWeek.endDate ? new Date(currentWeek.endDate) : null;
 
   return (
     <div className="w-[80vw] max-w-[1560px] my-10 shadow-xl overflow-hidden rounded-2xl fade-in-up">
       <CalendarControlPanel
         currentWeekName={currentWeekName}
         setCurrentWeekName={setCurrentWeekName}
+        setCalendar={setCalendar}
         startDate={startDate}
         endDate={endDate}
       />
