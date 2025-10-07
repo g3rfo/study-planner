@@ -10,7 +10,7 @@ function ColorChooseBar() {
   return (
     <form
       id="lesson-color"
-      className="w-full h-full flex justify-between items-center"
+      className="w-full h-full flex justify-between items-center transition-all"
     >
       {colorEntries.map(([key, color], index) => (
         <div
@@ -22,8 +22,8 @@ function ColorChooseBar() {
             className={radioStyle}
             type="radio"
             id={`option${index}`}
-            name="myOption"
-            value={key}
+            name="lesson-color-option"
+            value={JSON.stringify(color)}
           />
         </div>
       ))}

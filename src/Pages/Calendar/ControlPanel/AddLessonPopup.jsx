@@ -3,12 +3,9 @@ import Input from "../../../Components/Common/Input";
 import Button from "../../../Components/Common/Button";
 import PurpleButton from "../../../Components/Common/PurpleButton";
 import ColorChooseBar from "../../../Components/Common/ColorChooseBar";
+import { saveNewLesson } from "../../../Utils/saveNewLesson";
 
-function AddLessonPopup({ startDate, endDate }) {
-  const saveNewLesson = () => {
-    console.log('lesson saved');
-  }
-
+function AddLessonPopup({ setCalendar, startDate, endDate }) {
   const getFormatedDate = (date) => {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -112,7 +109,7 @@ function AddLessonPopup({ startDate, endDate }) {
                 htmlFor="lesson-end-time"
                 className="text-[14px] text-[#374151] dark:text-[#D1D5DB] font-light"
               >
-                End Time
+                End Time (+20min)
               </label>
             </div>
             <div className="h-11">
@@ -167,7 +164,7 @@ function AddLessonPopup({ startDate, endDate }) {
         <PurpleButton
           title={'Save'}
           h={10}
-          func={saveNewLesson}
+          func={() => saveNewLesson(setCalendar)}
         />
       </div>
     </>
