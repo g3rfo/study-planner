@@ -32,7 +32,7 @@ function CurrentTime() {
     currentTimeInSeconds >= startTimeInSeconds &&
     currentTimeInSeconds <= endTimeInSeconds ? (
       <div
-        className="absolute w-full border-t border-red-500"
+        className="absolute z-2 w-full border-t border-red-500"
         style={{ top: `${getPosition()}px` }}
       ></div>
     ) : null
