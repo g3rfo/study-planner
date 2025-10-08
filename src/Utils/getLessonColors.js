@@ -1,12 +1,12 @@
 export const getLessonColors = () => {
   return {
-    pink: {bg: '#ee9bcbe6', b: '#ee9bcb'},
-    red: {bg: '#d82929b0', b: '#d82929'},
-    orange: {bg: '#f19115d0', b: '#f19115'},
-    yellow: {bg: '#f1db15c0', b: '#f1db15'},
-    green: {bg: '#00aa00b0', b: '#00aa00'},
-    blue: {bg: '#1599f1b0', b: '#1599f1'},
+    pink: {bg: '#ee9bcbf0', b: '#ee9bcb'},
+    red: {bg: '#d82929c8', b: '#d82929'},
+    orange: {bg: '#f19215e2', b: '#f19215'},
+    yellow: {bg: '#ffe600e2', b: '#ffe600'},
+    green: {bg: '#14d714cf', b: '#14d714'},
     blueGreen: {bg: '#6cdaeee6', b: '#6cdaee'},
-    purple: {bg: '#6215f1d0', b: '#6215f1'}
+    blue: {bg: '#1599f1b0', b: '#1599f1'},
+    purple: {bg: '#702cefd7', b: '#702cef'}
   };
 }

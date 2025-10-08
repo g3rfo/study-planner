@@ -21,7 +21,7 @@ function Schedule({ currentWeek }) {
           <Dates startDate={new Date(currentWeek.startDate)} />
           <div className="h-[92%] relative overflow-y-hidden">
             <CurrentTime />
-            <Days />
+            <Days currentWeek={currentWeek}/>
           </div>
         </div>
       </div>
