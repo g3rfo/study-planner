@@ -1,17 +1,53 @@
 import Lesson from "./Lesson/Lesson";
 
-function Day() {
+function Day({ lessons }) {
+  const scheduleHeight = 956;
+  const startTimeInSeconds = 21600; // 6:00
+  const endTimeInSeconds = 79200; // 22:00
+
+  const getCurrentTimeInSeconds = (time) => {
+    return time.getHours() * 3600 +
+    time.getMinutes() * 60 +
+    time.getSeconds();
+  }
+
+  const getPlacingParams = (startTime, endTime) => {
+    const start = getCurrentTimeInSeconds(new Date(startTime));
+    const end = getCurrentTimeInSeconds(new Date(endTime));
+
+    const totalSeconds = endTimeInSeconds - startTimeInSeconds;
+    const height = ((end - start) / totalSeconds) * scheduleHeight;
+    const top = ((start - startTimeInSeconds) / totalSeconds) * scheduleHeight;
+
+    return { top, height };
+  }
+
+  const getFormatedTime = (startTime) => {
+    const time = new Date(startTime);
+    const hours = time.getHours().toString().padStart(2, '0');
+    const minutes = time.getMinutes().toString().padStart(2, '0');
+    return `${hours}:${minutes}`;
+  }
+
   return ( 
     <div
-      className="relative w-1/7 h-full
-        border-r border-[#dde1e9] dark:border-[#6d6f72] box-border"
+      className="relative w-1/7 h-full border-r border-[#dde1e9]
+        dark:border-[#6d6f72] box-border"
     >
-      <Lesson top={0} height={20} color='red' title='Test1'/>
-      <Lesson top={60} height={20} color="orange" title='Test2' />
-      <Lesson top={120} height={50} color="yellow" title='Test3' />
-      <Lesson top={180} height={60} color="green" title='Test4' />
-      <Lesson top={240} height={35} color="blue" title='Test5' />
-      <Lesson top={300} height={20} color="purple" title='Test6' />
+      {lessons?.map(lesson => {
+        const placingParams = getPlacingParams(lesson.startTime, lesson.endTime);
+
+        return (
+          <Lesson
+            key={lesson.startTime}
+            top={placingParams.top}
+            height={placingParams.height}
+            color={JSON.parse(lesson.color)}
+            title={lesson.title}
+            time={`${getFormatedTime(lesson.startTime)} - ${getFormatedTime(lesson.endTime)}`}
+          />
+        );
+      })}
     </div>
   );
 }

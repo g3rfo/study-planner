@@ -46,6 +46,7 @@ function AddLessonPopup({ setCalendar, startDate, endDate }) {
             <Input
               id={'lesson-name'}
               placeholder={'Add new lesson name'}
+              max={30}
             />
           </div>
         </div>

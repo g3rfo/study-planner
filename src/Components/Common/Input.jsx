@@ -59,6 +59,7 @@ function Input({
   // Only add min/max when they are provided and valid for the input type
   if ((type === 'date' || type === 'time') && min) inputProps.min = min;
   if ((type === 'date' || type === 'time') && max) inputProps.max = max;
+  if (type === 'text' && max) inputProps.maxLength = max;
 
   return <input {...inputProps} />;
 }
