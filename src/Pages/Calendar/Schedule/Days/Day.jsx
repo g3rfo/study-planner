@@ -45,6 +45,8 @@ function Day({ lessons }) {
             color={JSON.parse(lesson.color)}
             title={lesson.title}
             time={`${getFormatedTime(lesson.startTime)} - ${getFormatedTime(lesson.endTime)}`}
+            link={lesson.link}
+            notes={lesson.notes}
           />
         );
       })}

@@ -16,7 +16,7 @@ function Schedule({ currentWeek }) {
       >
         <Timeline />
       </div>
-      <div className="h-full overflow-x-auto custom-scrollbar">
+      <div className="h-full overflow-x-auto custom-scrollbar schedule-content">
         <div className="w-[2080px] h-full flex flex-col">
           <Dates startDate={new Date(currentWeek.startDate)} />
           <div className="h-[92%] relative overflow-y-hidden">

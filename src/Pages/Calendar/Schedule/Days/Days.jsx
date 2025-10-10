@@ -6,8 +6,8 @@ function Days({ currentWeek }) {
   
   return (
     <div 
-      className="flex h-full bg-[#c4dffc] dark:bg-[#293b5f]
-        border-t border-[#dde1e9] dark:border-[#6d6f72]"
+      className="flex h-full bg-[#d8e6f6] dark:bg-[#293b5f]
+        border-t border-[#dde1e9] dark:border-[#6d6f72] overflow-hidden"
       >
       <Day key={'mon'} lessons={days[0]} />
       <Day key={'tue'} lessons={days[1]} />
