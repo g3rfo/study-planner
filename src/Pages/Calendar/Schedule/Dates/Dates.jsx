@@ -1,15 +1,33 @@
+import { useEffect, useMemo } from "react";
 import Day from "./Day";
 
 function Dates({ startDate }) {
-  const dates = [];
-  for(let i = 0; i < 7; i++) {
-    const nextDate = new Date(startDate);
-    nextDate.setDate(startDate.getDate() + i);
-    dates.push(nextDate.getDate());
-  }
-
   const date = new Date();
   const today = date.getDate();
+
+
+  const dates = useMemo(() => {
+    const arr = [];
+    for(let i = 0; i < 7; i++) {
+      const nextDate = new Date(startDate);
+      nextDate.setDate(startDate.getDate() + i);
+      arr.push(nextDate.getDate());
+    }
+    return arr;
+  }, [startDate]);
+
+  useEffect(() => {
+    const schedule = document.querySelector('.schedule-content');
+    const currentScheduleWidth = getComputedStyle(schedule).width.slice(0, -2);
+    const scheduleWidth = getComputedStyle(schedule.firstChild).width.slice(0, -2);
+
+    const dayWidth = scheduleWidth / 7;
+    const activeDayIndex = dates.findIndex(date => date === today);
+    const activeDayCenter = dayWidth * activeDayIndex + dayWidth / 2;
+    const scrollLeft = activeDayCenter - currentScheduleWidth / 2;
+
+    schedule.scrollLeft = scrollLeft;
+  }, [dates, today])
 
   return (
     <div className="flex h-[8%]">
