@@ -27,13 +27,13 @@ function Lesson({ top = 0, height = 0, color, title, time, link = null, notes = 
   return (
     <div
       ref={lessonRef}
-      className={`absolute ${(notes || link) ? 'cursor-pointer' : ''} ${isOpen ? 'z-3 scale-110' : 'z-1'}
-        px-2 w-full flex flex-col gap-1 rounded-lg bg-transparent border-[1px] box-border text-[15px]
-        font-medium text-[#1F2937] dark:text-white fade-in-up `}
+      className={`absolute ${(notes || link) ? 'cursor-pointer' : ''} ${isOpen ? 'z-3 scale-110 translate-y-[5%] duration-50' : 'z-1'}
+        px-2 w-full flex flex-col gap-1 rounded-lg bg-transparent border-[1px] border-l-[15px] box-border text-[15px]
+        font-medium text-white fade-in-up`}
       style={{
         top: `${top}px`,
         height: isOpen ? 'auto' : `${height}px`,
-        backgroundColor: isOpen ? color.b : color.bg,
+        backgroundColor: color.bg,
         borderColor: color.b
       }}
     >
@@ -48,7 +48,7 @@ function Lesson({ top = 0, height = 0, color, title, time, link = null, notes = 
         <h1 className="font-light block w-[40%]">{time}</h1>
       </div>
       {isOpen && (notes || link) ? 
-        <div className="overflow-hidden h-fit flex flex-col gap-1 my-1 text-[#1F2937] dark:text-[#ffffff] border-t-2 border-[#ffffff]">
+        <div className="overflow-hidden h-fit flex flex-col gap-1 my-1 text-white border-t-2 border-white">
           {notes ?
             <div className="mt-3">
               <h1>Notes:</h1>
