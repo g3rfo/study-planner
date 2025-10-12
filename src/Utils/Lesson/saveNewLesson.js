@@ -1,5 +1,8 @@
-import { closePopup } from "../Hooks/usePopup";
-import { shakeAnimation } from "./shakeAnimation";
+import { closePopup } from "../../Hooks/usePopup";
+import { getLessonsWeekNum } from "./getLessonsWeek";
+import { shakeAnimation } from "../shakeAnimation";
+import { getLessonsDay } from "./getLessonsDay";
+import { generateLessonsID } from "./generateLessonsID";
 
 export const saveNewLesson = (setCalendar) => {
   let isValid = true;
@@ -57,29 +60,13 @@ export const saveNewLesson = (setCalendar) => {
   // check if there is already lesson in this time
   if (isValid) {
     const calendar = JSON.parse(localStorage.getItem('calendar'));
-    let weekNum = -1;
-    const week = Object.values(calendar).slice(0, 7).find(week => {
-      const startDate = new Date(week.startDate);
-      const endDate = new Date(week.endDate);
-      weekNum++;
-      return date.getTime() >= startDate.getTime() &&
-        date.getTime() <= endDate.getTime();
-    });
+    const [week, weekNum] = getLessonsWeekNum(calendar, date);
 
     if (week) {
-      const day = Object.values(week).find(day => {
-        if (typeof day === "object" && day !== null && day.date) {
-          const dayDate = new Date(day.date);
-          return dayDate.getDate() === date.getDate();
-        }
-        return false;
-      });
-
-      // Save name of day
-      const dayName = date.toLocaleDateString('en-US', { weekday: 'short' }).toLowerCase();
-      
+      const [day, dayName] = getLessonsDay(week, date);
       const lessons = [...day.lessons];
       let hasConflict = false;
+
       for (let lesson of lessons) {
         const lessonStart = new Date(lesson.startTime);
         const lessonEnd = new Date(lesson.endTime);
@@ -96,6 +83,7 @@ export const saveNewLesson = (setCalendar) => {
         shakeAnimation(endTimeInput);
       } else {
         lessons.push({
+          id: generateLessonsID(new Date(startTime)),
           startTime: startTime.toISOString(),
           endTime: endTime.toISOString(),
           title: name,

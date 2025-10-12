@@ -3,7 +3,7 @@ import Dates from "./Dates/Dates";
 import Days from "./Days/Days";
 import Timeline from "./Timeline/Timeline";
 
-function Schedule({ currentWeek }) {
+function Schedule({ setCalendar, currentWeek }) {
   return (
     <div
       className="w-full flex h-260 bg-white dark:bg-[#1F2937] overflow-hidden
@@ -21,7 +21,10 @@ function Schedule({ currentWeek }) {
           <Dates startDate={new Date(currentWeek.startDate)} />
           <div className="h-[92%] relative overflow-y-hidden">
             <CurrentTime />
-            <Days currentWeek={currentWeek}/>
+            <Days
+              setCalendar={setCalendar}
+              currentWeek={currentWeek}
+            />
           </div>
         </div>
       </div>
