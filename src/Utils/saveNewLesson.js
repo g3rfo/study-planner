@@ -63,7 +63,7 @@ export const saveNewLesson = (setCalendar) => {
       const endDate = new Date(week.endDate);
       weekNum++;
       return date.getTime() >= startDate.getTime() &&
-        date.getTime() <= endDate.getTime() + (1000 * 60 * 60 * 24 - 1); // to get end of the endDate
+        date.getTime() <= endDate.getTime();
     });
 
     if (week) {
@@ -77,8 +77,8 @@ export const saveNewLesson = (setCalendar) => {
 
       // Save name of day
       const dayName = date.toLocaleDateString('en-US', { weekday: 'short' }).toLowerCase();
+      
       const lessons = [...day.lessons];
-
       let hasConflict = false;
       for (let lesson of lessons) {
         const lessonStart = new Date(lesson.startTime);
