@@ -45,7 +45,7 @@ function Lesson({ top = 0, height = 0, color, title, time, link = null, notes = 
             {(notes || link) ? (isOpen ? `⯅${title}` : `⯆${title}`) : title}
           </h1>
         </div>
-        <h1 className="font-light block w-[40%]">{time}</h1>
+        <h1 className="font-light block w-[40%] text-end">{time}</h1>
       </div>
       {isOpen && (notes || link) ? 
         <div className="overflow-hidden h-fit flex flex-col gap-1 my-1 text-white border-t-2 border-white">

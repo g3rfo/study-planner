@@ -134,8 +134,10 @@ function Calendar() {
     const day = localDate.getDay() || 7; // Sunday -> 7
     const monday = new Date(localDate);
     monday.setDate(localDate.getDate() - day + 1);
+    monday.setHours(0, 0, 0, 0); // Start of Monday
     const sunday = new Date(monday);
     sunday.setDate(monday.getDate() + 6);
+    sunday.setHours(23, 59, 59, 999); // End of Sunday
     return [monday, sunday];
   };
 
