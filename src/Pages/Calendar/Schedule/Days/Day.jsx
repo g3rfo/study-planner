@@ -1,6 +1,6 @@
 import Lesson from "./Lesson/Lesson";
 
-function Day({ lessons }) {
+function Day({ setCalendar, lessons }) {
   const scheduleHeight = 956;
   const startTimeInSeconds = 21600; // 6:00
   const endTimeInSeconds = 79200; // 22:00
@@ -22,10 +22,10 @@ function Day({ lessons }) {
     return { top, height };
   }
 
-  const getFormatedTime = (startTime) => {
-    const time = new Date(startTime);
-    const hours = time.getHours().toString().padStart(2, '0');
-    const minutes = time.getMinutes().toString().padStart(2, '0');
+  const getFormatedTime = (time) => {
+    const t = new Date(time);
+    const hours = t.getHours().toString().padStart(2, '0');
+    const minutes = t.getMinutes().toString().padStart(2, '0');
     return `${hours}:${minutes}`;
   }
 
@@ -36,10 +36,11 @@ function Day({ lessons }) {
     >
       {lessons?.map(lesson => {
         const placingParams = getPlacingParams(lesson.startTime, lesson.endTime);
-
         return (
           <Lesson
-            key={lesson.startTime}
+            setCalendar={setCalendar}
+            key={lesson.id}
+            id={lesson.id}
             top={placingParams.top}
             height={placingParams.height}
             color={JSON.parse(lesson.color)}

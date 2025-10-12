@@ -153,7 +153,10 @@ function Calendar() {
         startDate={startDate}
         endDate={endDate}
       />
-      <Schedule currentWeek={currentWeek}/>
+      <Schedule
+        setCalendar={setCalendar}
+        currentWeek={currentWeek}
+      />
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import SubjectHandleButton from "./SubjectHandleButton";
+import SmallButton from "../../../Components/Common/SmallButton";
 import Progress from "./Progress";
 import Task from "./Task";
 import Button from "../../../Components/Common/Button";
@@ -88,11 +88,11 @@ function Subject({ title, subjects, setSubjects }) {
           </div>
         }
         <div className="flex gap-2">
-          <SubjectHandleButton
+          <SmallButton
             src={'./images/subject/EditNameIcon.svg'}
             func={() => {setIsTitleChanging(!isTitleChanging)}}
           />
-          <SubjectHandleButton
+          <SmallButton
             src={'./images/subject/DeleteIcon.svg'}
             func={deleteSubject}
           />
