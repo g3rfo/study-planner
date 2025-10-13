@@ -1,7 +1,7 @@
 import ControlPanelTitle from "../../../Components/Common/ControlPanelTitle";
-import AddLessonButton from "./AddLessonButton";
-import SaveScheduleButton from "./SaveScheduleButton";
-import SwitchDateBar from "./SwitchDateBar";
+import AddLessonButton from "./AddLesson/AddLessonButton";
+import SaveScheduleButton from "./SaveSchedule/SaveScheduleButton";
+import SwitchDateBar from "./SwitchWeek/SwitchDateBar";
 
 const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 

@@ -1,6 +1,6 @@
-import { usePopup } from "../../../Hooks/usePopup";
 import AddLessonPopup from "./AddLessonPopup";
-import BlueButton from "../../../Components/Common/BlueButton";
+import BlueButton from "../../../../Components/Common/BlueButton";
+import { usePopup } from "../../../../Hooks/usePopup";
 
 function AddLessonButton({ setCalendar, startDate = null, endDate = null }) {
   const { open, PopupContainer } = usePopup();
