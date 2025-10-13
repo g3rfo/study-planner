@@ -1,9 +1,9 @@
-import { closePopup } from "../../../Hooks/usePopup";
-import Input from "../../../Components/Common/Input";
-import Button from "../../../Components/Common/Button";
-import PurpleButton from "../../../Components/Common/PurpleButton";
-import ColorChooseBar from "../../../Components/Common/ColorChooseBar";
-import { saveNewLesson } from "../../../Utils/Lesson/saveNewLesson";
+import { closePopup } from "../../../../Hooks/usePopup";
+import Input from "../../../../Components/Common/Input";
+import Button from "../../../../Components/Common/Button";
+import PurpleButton from "../../../../Components/Common/PurpleButton";
+import ColorChooseBar from "../../../../Components/Common/ColorChooseBar";
+import { saveNewLesson } from "../../../../Utils/Lesson/saveNewLesson";
 
 function AddLessonPopup({ setCalendar, startDate, endDate }) {
   const getFormatedDate = (date) => {
@@ -130,7 +130,7 @@ function AddLessonPopup({ setCalendar, startDate, endDate }) {
             </span>
           </div>
           <div className="h-11 px-6">
-            <ColorChooseBar/>
+            <ColorChooseBar />
           </div>
         </div>
         <div className="h-23">
