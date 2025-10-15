@@ -1,4 +1,4 @@
-function ChooseWeekOption({ setChoosedWeek }) {
+function ChooseWeekOption({ setOption }) {
   const options = ['From', 'To'];
 
   return (
@@ -33,7 +33,7 @@ function ChooseWeekOption({ setChoosedWeek }) {
               name="schedule-week"
               value={option.toLowerCase()}
               defaultChecked={option === 'From'}
-              onChange={() => {setChoosedWeek(option)}}
+              onChange={() => {setOption(option)}}
             />
           </div>
         ))}
