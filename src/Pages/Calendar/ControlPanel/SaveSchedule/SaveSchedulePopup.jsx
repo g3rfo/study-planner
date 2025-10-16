@@ -4,9 +4,24 @@ import PurpleButton from "../../../../Components/Common/PurpleButton";
 import { closePopup } from "../../../../Hooks/usePopup";
 import ChooseWeekOption from "./ChooseWeekOption";
 import ChooseWeeksAsSchedule from "./ChooseWeeksAsSchedule";
+import { saveScheduleTemplate } from "../../../../Utils/ScheduleTemplate/saveScheduleTemplate";
 
 function SaveSchedulePopup() {
-  const [choosedWeek, setChoosedWeek] = useState('From');
+  const [option, setOption] = useState('From');
+  const [selectedWeeks, setSelectedWeeks] = useState([false, false, false, true, false, false, false]);
+  
+  const saveSchedule = () => {
+    const calendar = JSON.parse(localStorage.getItem('calendar')) || null;
+
+    const firstWeek = selectedWeeks.findIndex(week => week);
+    const lastWeek = selectedWeeks.findLastIndex(week => week);
+
+    if (calendar && firstWeek && lastWeek) {
+      saveScheduleTemplate(calendar, firstWeek, lastWeek);
+      console.log('ScheduleTemplate was saved');
+      closePopup();
+    }
+  }
 
   return (
     <>
@@ -23,9 +38,19 @@ function SaveSchedulePopup() {
         </button>
       </div>
       <div className="mt-6 flex flex-col">
-        <ChooseWeekOption setChoosedWeek={setChoosedWeek}/>
-        <ChooseWeeksAsSchedule choosedWeek={choosedWeek}/>
+        <ChooseWeekOption setOption={setOption} />
+        <ChooseWeeksAsSchedule
+          option={option}
+          selectedWeeks={selectedWeeks}
+          setSelectedWeeks={setSelectedWeeks}
+        />
       </div>
+      <div className="mt-6">
+        <h1 className="text-[13px] text-[#374151] dark:text-[#D1D5DB] font-light">
+          * if you save, future weeks will be filled with this schedule. when changing the template, the filled weeks will remain unchanged
+        </h1>
+      </div>
+
       <div className="mt-8 flex justify-end gap-2">
         <Button
           title='Cancel'
@@ -36,7 +61,7 @@ function SaveSchedulePopup() {
         <PurpleButton
           title='Save'
           h={10}
-          func={() => {}}
+          func={saveSchedule}
         />
       </div>
     </>
