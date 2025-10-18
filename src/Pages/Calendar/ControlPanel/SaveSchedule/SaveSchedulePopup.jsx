@@ -5,8 +5,9 @@ import { closePopup } from "../../../../Hooks/usePopup";
 import ChooseWeekOption from "./ChooseWeekOption";
 import ChooseWeeksAsSchedule from "./ChooseWeeksAsSchedule";
 import { saveScheduleTemplate } from "../../../../Utils/ScheduleTemplate/saveScheduleTemplate";
+import { injectScheduleTemplate } from "../../../../Utils/ScheduleTemplate/injectScheduleTemplate";
 
-function SaveSchedulePopup() {
+function SaveSchedulePopup({ setCalendar }) {
   const [option, setOption] = useState('From');
   const [selectedWeeks, setSelectedWeeks] = useState([false, false, false, true, false, false, false]);
   
@@ -17,8 +18,10 @@ function SaveSchedulePopup() {
     const lastWeek = selectedWeeks.findLastIndex(week => week);
 
     if (calendar && firstWeek && lastWeek) {
-      saveScheduleTemplate(calendar, firstWeek, lastWeek);
+      const [newCalendar, scheduleTemplate] = saveScheduleTemplate(calendar, firstWeek, lastWeek);
       console.log('ScheduleTemplate was saved');
+      injectScheduleTemplate(setCalendar, newCalendar, scheduleTemplate);
+      console.log('ScheduleTemplate was updated');
       closePopup();
     }
   }

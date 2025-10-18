@@ -20,7 +20,7 @@ function CalendarControlPanel({ currentWeekName, setCurrentWeekName, setCalendar
           startDate={`${monthNames[startDate.getMonth()]} ${startDate.getDate()}`}
           endDate={`${monthNames[endDate.getMonth()]} ${endDate.getDate()}`}
         />
-        <SaveScheduleButton />
+        <SaveScheduleButton setCalendar={setCalendar} />
         <AddLessonButton setCalendar={setCalendar} startDate={startDate} endDate={endDate}/>
       </div>
     </div>

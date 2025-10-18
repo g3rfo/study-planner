@@ -2,11 +2,11 @@ import PurpleButton from "../../../../Components/Common/PurpleButton";
 import { usePopup } from "../../../../Hooks/usePopup";
 import SaveSchedulePopup from "./SaveSchedulePopup";
 
-function SaveScheduleButton() {
+function SaveScheduleButton({ setCalendar }) {
   const { open, PopupContainer } = usePopup();
 
   const openPopup = () => {
-    open(<SaveSchedulePopup />);
+    open(<SaveSchedulePopup setCalendar={setCalendar} />);
   }
 
   return (

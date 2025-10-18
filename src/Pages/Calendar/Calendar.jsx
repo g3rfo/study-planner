@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import CalendarControlPanel from "./ControlPanel/CalendarControlPanel"
 import Schedule from "./Schedule/Schedule";
+import { injectScheduleTemplate } from "../../Utils/ScheduleTemplate/injectScheduleTemplate";
 
 // {
 //   week0 : {
+//     template: {isTemplated: false, weekNum: null}
 //     startDate : null,
 //     endDate : null,
 //     mon : {
@@ -60,6 +62,7 @@ function Calendar() {
       return {
         startDate,
         endDate,
+        template : {isTemplated: false, weekNum: null},
         mon: { date: new Date(startDate), lessons: [] },
         tue: { date: new Date(startDate.getTime() + 1 * dayTime), lessons: [] },
         wed: { date: new Date(startDate.getTime() + 2 * dayTime), lessons: [] },
@@ -113,7 +116,13 @@ function Calendar() {
       }
     }
 
-    setCalendar(newCalendar);
+    const scheduleTemplate = JSON.parse(localStorage.getItem('scheduleTemplate')) || null;
+
+    if (scheduleTemplate) {
+      injectScheduleTemplate(setCalendar, newCalendar, scheduleTemplate);
+    } else {
+      setCalendar(newCalendar);
+    }
   }, []);
 
   useEffect(() => {
