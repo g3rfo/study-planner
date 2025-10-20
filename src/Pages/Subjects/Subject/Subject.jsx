@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import SmallButton from "../../../Components/Common/SmallButton";
 import Progress from "./Progress";
 import Task from "./Task";
@@ -13,6 +13,67 @@ function Subject({ title, subjects, setSubjects }) {
   const [isTitleChanging, setIsTitleChanging] = useState(false);
   const [isTaskAdding, setIsTaskAdding] = useState(false);
 
+  const titleInputRef = useRef(null);
+  const addTaskInputRef = useRef(null);
+  const titleHandleButtonsRef = useRef(null);
+  const addTaskHandleButtonsRef = useRef(null);
+
+
+  const deleteSubject = () => {
+    const newSubjects = { ...subjects };
+    delete newSubjects[title];
+    localStorage.setItem('subjects', JSON.stringify(newSubjects));
+    setSubjects(newSubjects);
+  };
+  
+  const showTasks = () => {
+    const tasksTemplate = [];
+    
+    for (let task of tasks) {
+      tasksTemplate.push(
+        <Task
+        key={task.title}
+        subjectKey={title}
+        title={task.title}
+          status={task.done}
+          setTasks={setTasks}
+          />
+        );
+      }
+      
+      return (tasksTemplate);
+  };
+    
+  const addNewTask = useCallback((inputId) => {
+    const task = document.getElementById(inputId).value;
+    let subjects = JSON.parse(localStorage.getItem('subjects'));
+    
+    subjects[title].push({title: task, done: false});
+    
+    localStorage.setItem('subjects', JSON.stringify(subjects));
+    setTasks(JSON.parse(localStorage.getItem('subjects'))[title]);
+    setSubjects(JSON.parse(localStorage.getItem('subjects')));
+  }, [title, setSubjects]);
+
+  const submitTitleChange = useCallback(() => {
+    const isSaved = saveSubjectName('change-title', 'rename', setSubjects, title);
+    isSaved ? setIsTitleChanging(!isTitleChanging) : null;
+  }, [isTitleChanging, title, setSubjects]);
+
+  const closeTitleChanging = useCallback(() => {
+    setIsTitleChanging(!isTitleChanging);
+  }, [isTitleChanging]);
+
+  const submitTaskAdding = useCallback(() => {
+    addNewTask('add-task');
+    setIsTaskAdding(!isTaskAdding);
+  }, [addNewTask, isTaskAdding]);
+
+  const closeTaskAdding = useCallback(() => {
+    setIsTaskAdding(!isTaskAdding)
+  }, [isTaskAdding]);
+
+
   useEffect(() => {
     let result = 0;
     for (let task of tasks) {
@@ -21,41 +82,87 @@ function Subject({ title, subjects, setSubjects }) {
     setDoneTasksNum(result);
   }, [tasks])
 
-  const deleteSubject = () => {
-    const newSubjects = { ...subjects };
-    delete newSubjects[title];
-    localStorage.setItem('subjects', JSON.stringify(newSubjects));
-    setSubjects(newSubjects);
-  }
-
-  const showTasks = () => {
-    const tasksTemplate = [];
-
-    for (let task of tasks) {
-      tasksTemplate.push(
-        <Task
-          key={task.title}
-          subjectKey={title}
-          title={task.title}
-          status={task.done}
-          setTasks={setTasks}
-        />
-      );
+  useEffect(() => {
+    if (isTitleChanging && titleInputRef.current) {
+      titleInputRef.current.focus();
     }
+  }, [isTitleChanging]);
 
-    return (tasksTemplate);
-  }
+  useEffect(() => {
+    if (isTaskAdding && addTaskInputRef.current) {
+      addTaskInputRef.current.focus();
+    }
+  }, [isTaskAdding]);
 
-  const addNewTask = (inputId) => {
-    const task = document.getElementById(inputId).value;
-    let subjects = JSON.parse(localStorage.getItem('subjects'));
-    
-    subjects[title].push({title: task, done: false});
+  useEffect(() => {
+    if (!isTitleChanging || !titleInputRef.current) return;
 
-    localStorage.setItem('subjects', JSON.stringify(subjects));
-    setTasks(JSON.parse(localStorage.getItem('subjects'))[title]);
-    setSubjects(JSON.parse(localStorage.getItem('subjects')));
-  }
+    const handleKeyDown = (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        submitTitleChange();
+      }
+      if (e.key === "Escape") {
+        e.preventDefault();
+        closeTitleChanging();
+      }
+    };
+
+    const input = titleInputRef.current;
+    input.addEventListener("keydown", handleKeyDown);
+    return () => input.removeEventListener("keydown", handleKeyDown);
+  }, [isTitleChanging, closeTitleChanging, submitTitleChange]);
+
+  useEffect(() => {
+    if (!isTaskAdding || !addTaskInputRef.current) return;
+
+    const handleKeyDown = (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        submitTaskAdding();
+      }
+      if (e.key === "Escape") {
+        e.preventDefault();
+        closeTaskAdding();
+      }
+    };
+
+    const input = addTaskInputRef.current;
+    input.addEventListener("keydown", handleKeyDown);
+    return () => input.removeEventListener("keydown", handleKeyDown);
+  }, [isTaskAdding, closeTaskAdding, submitTaskAdding]);
+
+  useEffect(() => {
+    if (!isTitleChanging) return;
+
+    const handleClickOutside = (event) => {
+      if (
+        titleInputRef.current &&
+        !titleInputRef.current.contains(event.target) &&
+        (titleHandleButtonsRef.current || !titleHandleButtonsRef.current.contains(event.target))
+      ) {
+        closeTitleChanging();
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isTitleChanging, closeTitleChanging]);
+
+  useEffect(() => {
+    if (!isTaskAdding) return;
+
+    const handleClickOutside = (event) => {
+      if (
+        addTaskInputRef.current &&
+        !addTaskInputRef.current.contains(event.target) &&
+        (!addTaskHandleButtonsRef.current || !addTaskHandleButtonsRef.current.contains(event.target))
+      ) {
+        closeTaskAdding();
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isTaskAdding, closeTaskAdding]);
 
   return (
     <div 
@@ -71,19 +178,20 @@ function Subject({ title, subjects, setSubjects }) {
             {title}
           </h1>
           :
-          <div className="flex justify-between items-center w-[75%]">
+          <div
+            className="flex justify-between items-center w-[75%]"
+          >
             <Input
+              ref={titleInputRef}
               id='change-title'
               placeholder={'Enter new name'}
               value={title}
               h={9}
             />
             <InputHandleButtons
-              submitFunc={() => {
-                const isSaved = saveSubjectName('change-title', 'rename', setSubjects, title);
-                isSaved ? setIsTitleChanging(!isTitleChanging) : null;
-              }}
-              closeFunc={() => {setIsTitleChanging(!isTitleChanging)}}
+              ref={titleHandleButtonsRef}
+              submitFunc={submitTitleChange}
+              closeFunc={closeTitleChanging}
             />
           </div>
         }
@@ -122,16 +230,15 @@ function Subject({ title, subjects, setSubjects }) {
           :
           <div className="flex justify-between items-center w-full">
             <Input
+              ref={addTaskInputRef}
               id='add-task'
               placeholder={'Enter new task'}
               h={10}
             />
             <InputHandleButtons
-              submitFunc={() => {
-                addNewTask('add-task');
-                setIsTaskAdding(!isTaskAdding);
-              }}
-              closeFunc={() => {setIsTaskAdding(!isTaskAdding)}}
+              ref={addTaskHandleButtonsRef}
+              submitFunc={submitTaskAdding}
+              closeFunc={closeTaskAdding}
               h={8}
             />
           </div>

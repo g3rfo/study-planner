@@ -3,14 +3,50 @@ import Button from "../../Components/Common/Button";
 import Input from "../../Components/Common/Input";
 import PurpleButton from "../../Components/Common/PurpleButton";
 import { saveSubjectName } from "../../Utils/saveSubjectName";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 function AddSubjectPopup({ setSubjects }) {
-  const saveNewSubject = () => {
+  const [focusedItem, setFocusedItem] = useState(null);
+  const popupRef = useRef(null);
+
+  const saveNewSubject = useCallback(() => {
     saveSubjectName('add-subject', 'save', setSubjects);
-  }
+  }, [setSubjects]);
+
+  useEffect(() => {
+    const popup = popupRef.current;
+    if (!popup) return;
+
+    popup.tabIndex = -1;
+    popup.focus();
+
+    const handleKeyDown = (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+
+        if (!focusedItem || focusedItem === popup) {
+          saveNewSubject();
+        } else {
+          focusedItem.blur();
+        }
+      }
+
+      if (e.key === "Escape") {
+        e.preventDefault();
+        closePopup();
+      }
+    };
+
+    popup.addEventListener("keydown", handleKeyDown);
+    return () => popup.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   return (
-    <>
+    <div
+      ref={popupRef}
+      className="p-6 w-[clamp(400px,40%,500px)] h-fit bg-white outline-none
+      dark:bg-[#1F2937] shadow-2xl rounded-xl box-border fade-in-up"
+    >
       <div className="flex justify-between items-center h-7">
         <h1 className="text-[18px] font-medium text-[#374151] dark:text-white">
           Add New Subject
@@ -36,6 +72,7 @@ function AddSubjectPopup({ setSubjects }) {
           <Input
             id={'add-subject'}
             placeholder={'Add new subject name'}
+            onFocus={(e) => setFocusedItem(e.target)}
           />
         </div>
       </div>
@@ -52,7 +89,7 @@ function AddSubjectPopup({ setSubjects }) {
           func={saveNewSubject}
         />
       </div>
-    </>
+    </div>
   );
 }
 

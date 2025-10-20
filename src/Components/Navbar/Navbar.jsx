@@ -28,7 +28,7 @@ function Navbar() {
             justify-between items-center w-65 h-12 px-2 rounded-l-4xl
             rounded-r-4xl bg-[#F3F4F6] dark:bg-[#374151] shadow-xs"
         >
-          <Link to="/">
+          <Link className="outline-none" to="/">
             <PageButton
               iconName="CalendarIcon.svg"
               title="Calendar"
@@ -36,7 +36,7 @@ function Navbar() {
               setCurPage={setCurPage}
             />
           </Link>
-          <Link to="/subjects">
+          <Link className="outline-none" to="/subjects">
             <PageButton
               iconName="SubjectsIcon.svg"
               title="Subjects"

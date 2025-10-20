@@ -1,33 +1,20 @@
-// function Input({ id, type = 'text', placeholder = '', value = '', h = 'full' }) {
-//   return (
-//     <input
-//       type={type}
-//       min={'2025-09-29'}
-//       max={'2025-10-5'}
-//       id={id}
-//       placeholder={placeholder}
-//       defaultValue={value}
-//       className={
-//         `transition-all focus:transition-none box-border pl-3 w-full h-${h} bg-white 
-//         dark:bg-[#374151] shadow-sm rounded-lg text-[16px] text-[#374151] 
-//         dark:text-[#CCCCCC] font-light placeholder:text-[16px] focus:border-none 
-//         focus:outline-3 focus:outline-[#A855F7] placeholder:text-[#CCCCCC] placeholder:font-light`
-//       }
-//     />
-//   );
-// }
+import { forwardRef } from "react";
 
-// export default Input;
-
-function Input({
-  id,
-  type = 'text',
-  placeholder = '',
-  value = '',
-  h = 'full',
-  min,
-  max
-}) {
+const Input = forwardRef(
+  (
+    {
+      id,
+      type = 'text',
+      placeholder = '',
+      value = '',
+      h = 'full',
+      min,
+      max,
+      onBlur,
+      onFocus
+    },
+    ref
+  ) => {
   const handleBlur = (e) => {
     if (type === 'time' && (min || max)) {
       const val = e.target.value;
@@ -40,6 +27,8 @@ function Input({
         e.target.value = max;
       }
     }
+
+    if (onBlur) onBlur(e);
   };
 
   const inputProps = {
@@ -48,8 +37,10 @@ function Input({
     placeholder,
     defaultValue: value,
     onBlur: handleBlur,
+    onFocus,
+    ref,
     className: `
-      transition-all focus:transition-none box-border px-3 w-full h-${h} bg-white 
+      transition-transform box-border px-3 w-full h-${h} bg-white 
       dark:bg-[#374151] shadow-sm rounded-lg text-[16px] text-[#374151] 
       dark:text-[#CCCCCC] font-light placeholder:text-[16px] focus:border-none 
       focus:outline-3 focus:outline-[#A855F7] placeholder:text-[#CCCCCC] placeholder:font-light
@@ -62,6 +53,6 @@ function Input({
   if (type === 'text' && max) inputProps.maxLength = max;
 
   return <input {...inputProps} />;
-}
+});
 
 export default Input;

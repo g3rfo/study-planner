@@ -4,8 +4,41 @@ import Button from "../../../../Components/Common/Button";
 import PurpleButton from "../../../../Components/Common/PurpleButton";
 import ColorChooseBar from "../../../../Components/Common/ColorChooseBar";
 import { saveNewLesson } from "../../../../Utils/Lesson/saveNewLesson";
+import { useEffect, useRef, useState } from "react";
 
 function AddLessonPopup({ setCalendar, startDate, endDate }) {
+  const [focusedItem, setFocusedItem] = useState(null);
+  const popupRef = useRef(null);
+
+  useEffect(() => {
+    const popup = popupRef.current;
+    if (!popup) return;
+
+    popup.tabIndex = -1;
+    popup.focus();
+
+    const handleKeyDown = (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+
+        if (!focusedItem || focusedItem === popup) {
+          saveNewLesson(setCalendar);
+        } else {
+          focusedItem.blur();
+        }
+      }
+
+      if (e.key === "Escape") {
+        e.preventDefault();
+        closePopup();
+      }
+    };
+
+    popup.addEventListener("keydown", handleKeyDown);
+    return () => popup.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
+
   const getFormatedDate = (date) => {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -19,7 +52,11 @@ function AddLessonPopup({ setCalendar, startDate, endDate }) {
   calendarEndDate.setDate(calendarEndDate.getDate() + 21);
 
   return (
-    <>
+    <div
+      ref={popupRef}
+      className="p-6 w-[clamp(400px,40%,500px)] h-fit bg-white outline-none
+      dark:bg-[#1F2937] shadow-2xl rounded-xl box-border fade-in-up"
+    >
       <div className="flex justify-between items-center h-7">
         <h1 className="text-[18px] font-medium text-[#374151] dark:text-white">
           Add New Lesson
@@ -63,6 +100,7 @@ function AddLessonPopup({ setCalendar, startDate, endDate }) {
             <Input
               id={'lesson-link'}
               placeholder={'https://...'}
+              onFocus={(e) => setFocusedItem(e.target)}
             />
           </div>
         </div>
@@ -82,6 +120,7 @@ function AddLessonPopup({ setCalendar, startDate, endDate }) {
               value={getFormatedDate(new Date())}
               min={getFormatedDate(calendarStartDate)}
               max={getFormatedDate(calendarEndDate)}
+              onFocus={(e) => setFocusedItem(e.target)}
             />
           </div>
         </div>
@@ -101,6 +140,7 @@ function AddLessonPopup({ setCalendar, startDate, endDate }) {
                 type="time"
                 min="06:00"
                 max="22:00"
+                onFocus={(e) => setFocusedItem(e.target)}
               />
             </div>
           </div>
@@ -119,6 +159,7 @@ function AddLessonPopup({ setCalendar, startDate, endDate }) {
                 type="time"
                 min="06:00"
                 max="22:00"
+                onFocus={(e) => setFocusedItem(e.target)}
               />
             </div>
           </div>
@@ -168,7 +209,7 @@ function AddLessonPopup({ setCalendar, startDate, endDate }) {
           func={() => saveNewLesson(setCalendar)}
         />
       </div>
-    </>
+    </div>
   );
 }
 
