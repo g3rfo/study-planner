@@ -1,31 +1,28 @@
-function InputHandleButtons({ submitFunc = () => {}, closeFunc = () => {}, h = '8' }) {
-  const buttonStyle = 
+import { forwardRef } from 'react';
+
+const InputHandleButtons = forwardRef(function InputHandleButtons(
+  { submitFunc = () => {}, closeFunc = () => {}, h = '8' },
+  ref
+) {
+  const buttonStyle =
     'flex justify-center items-center cur cursor-pointer hover:scale-110 duration-150 h-full aspect-square outline-none';
 
   return (
-    <div className={`flex rounded-r-lg h-${h}`}>
-      <button 
+    <div ref={ref} className={`flex rounded-r-lg h-${h}`}>
+      <button
         className={`${buttonStyle} bg-[#A855F7]`}
         onClick={() => submitFunc()}
       >
-        <img
-          src={'./images/SubmitIcon.svg'}
-          alt=""
-          className="w-5 h-5"
-        />
+        <img src={'./images/SubmitIcon.svg'} alt="" className="w-5 h-5" />
       </button>
       <button
         className={`${buttonStyle} bg-white dark:bg-[#374151] rounded-r-lg`}
         onClick={() => closeFunc()}
       >
-        <img
-          src={'./images/CloseIcon.svg'}
-          alt=""
-          className="w-5 h-5"
-        />
+        <img src={'./images/CloseIcon.svg'} alt="" className="w-5 h-5" />
       </button>
     </div>
   );
-}
+});
 
 export default InputHandleButtons;

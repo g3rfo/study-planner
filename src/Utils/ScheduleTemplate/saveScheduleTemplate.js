@@ -14,14 +14,12 @@ export const saveScheduleTemplate = (calendar, firstWeek, lastWeek) => {
       calendar[`week${i}`].template.isTemplated = true;
       calendar[`week${i}`].template.weekNum = weekNum % (lastWeek - firstWeek + 1);
       weekNum++;
-      console.log(`Week${i}: weekNum-${calendar[`week${i}`].template.weekNum}, template-${calendar[`week${i}`].template.isTemplated}`)
       continue;
     }
 
     if (calendar[`week${i}`].template.isTemplated) {
       calendar[`week${i}`].template.isTemplated = false;
       calendar[`week${i}`].template.weekNum = null;
-      console.log(`Week${i}: weekNum-${calendar[`week${i}`].template.weekNum}, template-${calendar[`week${i}`].template.isTemplated}`)
     }
   }
 

@@ -21,8 +21,6 @@ export const saveSubjectName = (inputId, action, setSubjects, title = '') => {
     } else if (action === 'rename') {
       const oldName = title;
 
-      console.log(oldName);
-
       if (oldName && subjects[oldName]) {
       subjects[name] = subjects[oldName];
       delete subjects[oldName];

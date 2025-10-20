@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Button from "../../../../Components/Common/Button";
 import PurpleButton from "../../../../Components/Common/PurpleButton";
 import { closePopup } from "../../../../Hooks/usePopup";
@@ -10,6 +10,7 @@ import { injectScheduleTemplate } from "../../../../Utils/ScheduleTemplate/injec
 function SaveSchedulePopup({ setCalendar }) {
   const [option, setOption] = useState('From');
   const [selectedWeeks, setSelectedWeeks] = useState([false, false, false, true, false, false, false]);
+  const popupRef = useRef(null);
   
   const saveSchedule = () => {
     const calendar = JSON.parse(localStorage.getItem('calendar')) || null;
@@ -26,8 +27,36 @@ function SaveSchedulePopup({ setCalendar }) {
     }
   }
 
+  useEffect(() => {
+    const popup = popupRef.current;
+    if (!popup) return;
+
+    popup.tabIndex = -1;
+    popup.focus();
+
+    const handleKeyDown = (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        saveSchedule()
+      }
+
+      if (e.key === "Escape") {
+        e.preventDefault();
+        closePopup();
+      }
+    };
+
+    popup.addEventListener("keydown", handleKeyDown);
+    return () => popup.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
+
   return (
-    <>
+    <div
+      ref={popupRef}
+      className="p-6 w-[clamp(400px,40%,500px)] h-fit bg-white outline-none
+      dark:bg-[#1F2937] shadow-2xl rounded-xl box-border fade-in-up"
+    >
       <div className="flex justify-between items-center h-7">
         <h1 className="text-[18px] font-medium text-[#374151] dark:text-white">
           Save Schedule
@@ -67,7 +96,7 @@ function SaveSchedulePopup({ setCalendar }) {
           func={saveSchedule}
         />
       </div>
-    </>
+    </div>
   );
 }
 
