@@ -5,10 +5,13 @@ import Task from "./Task";
 import Button from "../../../Components/Common/Button";
 import Input from "../../../Components/Common/Input";
 import InputHandleButtons from "./InputHandleButtons";
-import { saveSubjectName } from "../../../Utils/saveSubjectName";
+import { saveSubject } from "../../../Utils/Subject/saveSubject";
 
 function Subject({ title, subjects, setSubjects }) {
-  const [tasks, setTasks] = useState(subjects[title]);
+  const subject = subjects[title];
+  const color = JSON.parse(subject.color);
+
+  const [tasks, setTasks] = useState(subject.tasks);
   const [doneTasksNum, setDoneTasksNum] = useState(0);
   const [isTitleChanging, setIsTitleChanging] = useState(false);
   const [isTaskAdding, setIsTaskAdding] = useState(false);
@@ -27,36 +30,32 @@ function Subject({ title, subjects, setSubjects }) {
   };
   
   const showTasks = () => {
-    const tasksTemplate = [];
-    
-    for (let task of tasks) {
-      tasksTemplate.push(
+    return tasks.map(task => {
+      return (
         <Task
-        key={task.title}
-        subjectKey={title}
-        title={task.title}
+          key={task.title}
+          subjectKey={title}
+          title={task.title}
           status={task.done}
           setTasks={setTasks}
-          />
-        );
-      }
-      
-      return (tasksTemplate);
+        />
+      );
+    });
   };
     
   const addNewTask = useCallback((inputId) => {
-    const task = document.getElementById(inputId).value;
+    const newTask = document.getElementById(inputId).value;
     let subjects = JSON.parse(localStorage.getItem('subjects'));
     
-    subjects[title].push({title: task, done: false});
+    subjects[title].tasks.push({title: newTask, done: false});
     
     localStorage.setItem('subjects', JSON.stringify(subjects));
-    setTasks(JSON.parse(localStorage.getItem('subjects'))[title]);
+    setTasks(JSON.parse(localStorage.getItem('subjects'))[title].tasks);
     setSubjects(JSON.parse(localStorage.getItem('subjects')));
   }, [title, setSubjects]);
 
   const submitTitleChange = useCallback(() => {
-    const isSaved = saveSubjectName('change-title', 'rename', setSubjects, title);
+    const isSaved = saveSubject('change-title', 'rename', setSubjects, title);
     isSaved ? setIsTitleChanging(!isTitleChanging) : null;
   }, [isTitleChanging, title, setSubjects]);
 
@@ -75,11 +74,8 @@ function Subject({ title, subjects, setSubjects }) {
 
 
   useEffect(() => {
-    let result = 0;
-    for (let task of tasks) {
-      if (task.done) result++;
-    }
-    setDoneTasksNum(result);
+    const doneCount = tasks.filter(task => task.done).length;
+    setDoneTasksNum(doneCount);
   }, [tasks])
 
   useEffect(() => {
@@ -166,15 +162,15 @@ function Subject({ title, subjects, setSubjects }) {
 
   return (
     <div 
-      className="w-full rounded-xl overflow-hidden bg-white dark:bg-[#1F2937] border 
-      border-[#d5b5f7] dark:border-[#374151] shadow-xl fade-in-up"
+      className="w-full rounded-xl overflow-hidden border shadow-xl fade-in-up bg-white dark:bg-[#1F2937]"
+      style={{ borderColor: color.b }}
     >
       <div
-        className="box-border p-4 flex justify-between items-center h-15 bg-[#F9F4FF]
-        dark:bg-[#2B2648] border-b border-[#d5b5f7] dark:border-[#581C87]"
+        className="box-border p-4 flex justify-between items-center h-15 border-b"
+        style={{ backgroundColor: color.bg, borderColor: color.b }}
       >
         {!isTitleChanging ? 
-          <h1 className="text-[17px] font-semibold text-[#7E22CE] dark:text-[#D8B4FE]">
+          <h1 className="text-[17px] font-semibold text-white">
             {title}
           </h1>
           :

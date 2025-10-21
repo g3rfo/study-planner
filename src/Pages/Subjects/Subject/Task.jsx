@@ -5,29 +5,32 @@ function Task({ title, status, subjectKey, setTasks}) {
   
   const updateSubjectTasks = (updateFn) => {
     const subjects = JSON.parse(localStorage.getItem("subjects")) || {};
-    const subject = subjects[subjectKey] || [];
+    const subject = subjects[subjectKey];
+    if (!subject) return;
 
-    const updatedSubject = updateFn([...subject]); // work on a copy
+    const tasks = subject.tasks || [];
+    const updatedTasks = updateFn([...tasks]); // work on a copy
 
-    subjects[subjectKey] = updatedSubject;
+    subject.tasks = updatedTasks;
+    subjects[subjectKey] = subject;
+
     localStorage.setItem("subjects", JSON.stringify(subjects));
-
-    setTasks(updatedSubject);
+    setTasks(updatedTasks);
   };
 
   const checkTask = () => {
     setChecked(!checked);
-    updateSubjectTasks((subject) => {
-      const taskIndex = subject.findIndex(task => task.title === title);
+    updateSubjectTasks((tasks) => {
+      const taskIndex = tasks.findIndex(task => task.title === title);
       if (taskIndex !== -1) {
-        subject[taskIndex].done = !subject[taskIndex].done;
+        tasks[taskIndex].done = !tasks[taskIndex].done;
       }
-      return subject;
+      return tasks;
     });
   };
 
   const deleteTask = () => {
-    updateSubjectTasks((subject) => subject.filter(task => task.title !== title));
+    updateSubjectTasks((tasks) => tasks.filter(task => task.title !== title));
   };
 
   return (

@@ -43,11 +43,11 @@ export const saveNewLesson = (setCalendar) => {
   }
 
   // color
-  const colorInput = Array.from(document.getElementsByName('lesson-color-option'));
+  const colorInput = Array.from(document.getElementsByName('color-option'));
   let selectedColor = colorInput.find(option => option.checked)?.value;
 
   if (!selectedColor) {
-    shakeAnimation(document.getElementById('lesson-color'));
+    shakeAnimation(document.getElementById('color-form'));
     isValid = false;
   }
 

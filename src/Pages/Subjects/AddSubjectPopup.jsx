@@ -2,15 +2,16 @@ import { closePopup } from "../../Hooks/usePopup";
 import Button from "../../Components/Common/Button";
 import Input from "../../Components/Common/Input";
 import PurpleButton from "../../Components/Common/PurpleButton";
-import { saveSubjectName } from "../../Utils/saveSubjectName";
+import { saveSubject } from "../../Utils/Subject/saveSubject";
 import { useCallback, useEffect, useRef, useState } from "react";
+import ColorChooseBar from "../../Components/Common/ColorChooseBar";
 
 function AddSubjectPopup({ setSubjects }) {
   const [focusedItem, setFocusedItem] = useState(null);
   const popupRef = useRef(null);
 
   const saveNewSubject = useCallback(() => {
-    saveSubjectName('add-subject', 'save', setSubjects);
+    saveSubject('add-subject', 'save', setSubjects);
   }, [setSubjects]);
 
   useEffect(() => {
@@ -75,6 +76,9 @@ function AddSubjectPopup({ setSubjects }) {
             onFocus={(e) => setFocusedItem(e.target)}
           />
         </div>
+      </div>
+      <div className="mt-6 h-11 px-6">
+        <ColorChooseBar />
       </div>
       <div className="mt-8 flex justify-end gap-2">
         <Button
