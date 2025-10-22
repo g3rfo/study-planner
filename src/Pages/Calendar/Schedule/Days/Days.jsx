@@ -2,7 +2,13 @@ import Day from "./Day";
 
 function Days({ setCalendar, currentWeek }) {
   const dayKeys = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
-  const days = dayKeys.map(key => Array.from(currentWeek[key]?.lessons ?? []));
+  const days = dayKeys.map(key => {
+    const day = currentWeek?.[key];
+    return {
+      date: day?.date ?? null,
+      lessons: Array.from(day?.lessons ?? [])
+    };
+  });
 
   return (
     <div 
@@ -12,7 +18,8 @@ function Days({ setCalendar, currentWeek }) {
       {days?.map((day, idx) => (
         <Day
           key={dayKeys[idx]}
-          lessons={day}
+          date={day.date}
+          lessons={day.lessons}
           setCalendar={setCalendar}
         />
       ))}

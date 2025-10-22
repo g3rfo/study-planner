@@ -1,6 +1,6 @@
 import Lesson from "./Lesson/Lesson";
 
-function Day({ setCalendar, lessons }) {
+function Day({ setCalendar, date, lessons }) {
   const scheduleHeight = 956;
   const startTimeInSeconds = 21600; // 6:00
   const endTimeInSeconds = 79200; // 22:00
@@ -41,6 +41,7 @@ function Day({ setCalendar, lessons }) {
             setCalendar={setCalendar}
             key={lesson.id}
             id={lesson.id}
+            date={date}
             top={placingParams.top}
             height={placingParams.height}
             color={JSON.parse(lesson.color)}
