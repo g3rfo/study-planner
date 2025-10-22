@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import LessonDeleteButton from "./LessonDeleteButton";
 
-function Lesson({ setCalendar, id, top = 0, height = 0, color, title, time, link = null, notes = null }) {
+function Lesson({ setCalendar, id, date, top = 0, height = 0, color, title, time, link = null, notes = null }) {
   const [isOpen, setIsOpen] = useState(false);
   const lessonRef = useRef(null);
 
@@ -55,6 +55,7 @@ function Lesson({ setCalendar, id, top = 0, height = 0, color, title, time, link
           <LessonDeleteButton
             setCalendar={setCalendar}
             id={id}
+            date={date}
           />
         </div>
       </div>
