@@ -3,39 +3,6 @@ import CalendarControlPanel from "./ControlPanel/CalendarControlPanel"
 import Schedule from "./Schedule/Schedule";
 import { injectScheduleTemplate } from "../../Utils/ScheduleTemplate/injectScheduleTemplate";
 
-// {
-//   week0 : {
-//     template: {isTemplated: false, weekNum: null}
-//     startDate : null,
-//     endDate : null,
-//     mon : {
-//       date: null,
-//       lessons : [
-//         {
-//           id:          
-//           startTime: null,
-//           endTime: null,
-//           title: null,
-//           notes: null,
-//           link: null,
-//           color: null
-//         }
-//       ]
-//     },
-//     tue : {},
-//     wed : {},
-//     thu : {},
-//     fri : {},
-//     sat : {},
-//     sun : {},
-//   },
-//   week1 : {},
-//   week2 : {},
-//   week3 : {},
-//   week4 : {},
-//   week5 : {},
-//   week6 : {},
-// }
 const dayTime = 24 * 60 * 60 * 1000;
 
 function Calendar() {
