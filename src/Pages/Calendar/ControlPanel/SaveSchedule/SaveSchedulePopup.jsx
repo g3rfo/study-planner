@@ -27,6 +27,11 @@ function SaveSchedulePopup({ setCalendar }) {
     }
   }
 
+  const deleteSchedule = () => {
+    localStorage.removeItem('scheduleTemplate');
+    closePopup();
+  }
+
   useEffect(() => {
     const popup = popupRef.current;
     if (!popup) return;
@@ -79,11 +84,19 @@ function SaveSchedulePopup({ setCalendar }) {
       </div>
       <div className="mt-6">
         <h1 className="text-[13px] text-[#374151] dark:text-[#D1D5DB] font-light">
-          * if you save, future weeks will be filled with this schedule. when changing the template, the filled weeks will remain unchanged
+          *if you save, the following weeks will be filled with this schedule. When you change the template, the filled weeks will remain unchanged
         </h1>
       </div>
 
       <div className="mt-8 flex justify-end gap-2">
+        {localStorage.getItem('scheduleTemplate') ? 
+          <Button
+            title='Delete Template'
+            h={10}
+            fs={16}
+            func={deleteSchedule}
+          />
+        : null}
         <Button
           title='Cancel'
           h={10}
