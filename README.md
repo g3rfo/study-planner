@@ -1,4 +1,4 @@
-<h1>📚 Study Planner</h1>
+<h1>Study Planner</h1>
 <p>
   A powerful and minimal <strong>React-based study planner</strong> built with <strong>Vite</strong> and <strong>Tailwind CSS</strong>.  
   Designed to help you organize lessons, subjects, and tasks — all stored locally in your browser.
